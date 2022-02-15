@@ -86,21 +86,24 @@ const BookWrite = () => {
             type="text"
             // className="writeInput writeText"
             onChange={e=>setContact(e.target.value)}
-          ></input>
+          ></input> <br />
         <textarea
             placeholder="Tell department"
             type="text"
             // className="writeInput writeText"
             onChange={e=>setDepartment(e.target.value)}
-          ></textarea>
+          ></textarea> <br />
           <textarea
             placeholder="Tell description"
             type="text"
             // className="writeInput writeText"
             onChange={e=>setDesc(e.target.value)}
           ></textarea>
+          <br />
         {/* </div> */}
-        <button className="writeSubmit" type="submit">
+        {/* <button className="writeSubmit" type="submit"> */}
+
+        <button  type="submit">
           Publish
         </button>
       </form>

@@ -1,34 +1,55 @@
 import axios from "axios";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
 import "./register.css";
 
 export default function Register(props) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState("");
   const [password, setPassword] = useState("");
   const [contact, setContact] = useState("");
   const [studentId, setStudentId] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
   const [isDonor, setIsDonor] = useState("");
   const [isEntrepreneur, setIsEntrepreneur] = useState("");
-  const [ isReporter, setIsReporter] = useState("");
+  const [isReporter, setIsReporter] = useState("");
   const [error, setError] = useState(false);
+
+
+  useEffect (() => {
+    const getValidUsers = async () => {
+      
+      const res = await axios.get(`/validUsers/?email=${email}`);
+      console.log(res.data)
+      setValidEmail(res.data)
+    };
+    getValidUsers();
+  },[email])
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(false);
     try {
-      const res = await axios.post("/auth/register", {
-        username,
-        email,
-        password,
-        contact,
-        studentId,
-        bloodGroup,
-        isDonor, isEntrepreneur, isReporter
-      });
-      res.data && window.location.replace("/login");
+      if (validEmail) {
+        setError(false);
+        
+        const res = await axios.post("/auth/register", {
+          username,
+          email,
+          password,
+          contact,
+          studentId,
+          bloodGroup,
+          isDonor, isEntrepreneur, isReporter
+        });
+        
+        window.location.reload();
+      }
+      else {
+        setError(true);
+      }
+      
     } catch (err) {
       setError(true);
     }
@@ -55,16 +76,17 @@ export default function Register(props) {
   <input
     type="text"
     placeholder="Enter your email..."
-    onChange={(e) => 
-      { var split = e.target.value.split('@')
-      var domain = split[1]
-      if (String(domain) ==="student.nstu.edu.bd") {
-        setError(false)
-        setEmail(e.target.value)
-      } else {
-        setError(true)
-      }}
-    }
+    onChange={(e) => setEmail(e.target.value)}
+    // onChange={(e) => 
+    //   { var split = e.target.value.split('@')
+    //   var domain = split[1]
+    //   if (String(domain) ==="student.nstu.edu.bd") {
+    //     setError(false)
+    //     setEmail(e.target.value)
+    //   } else {
+    //     setError(true)
+    //   }}
+    // }
   /> <br /><br />
    
   {/* <label >Contact Number</label> &nbsp; */}
@@ -126,7 +148,7 @@ export default function Register(props) {
 
 
 
- {error && <span style={{color:"red", marginTop:"10px"}}>Something went wrong!</span>}
+ {error && <span style={{color:"red", marginTop:"10px"}}>Something went wrong! May be your email is not valid or you put data on wrong format or you miss to put data </span>}
 
 </form>
  {props.children}

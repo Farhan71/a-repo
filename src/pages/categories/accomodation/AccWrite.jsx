@@ -11,6 +11,7 @@ const AccWrite = () => {
   const [contact, setContact] = useState("");
   const [locationDetails, setLocationDetails] = useState("");
   const [desc, setDesc] = useState("");
+  
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
 
@@ -18,6 +19,7 @@ const AccWrite = () => {
     e.preventDefault();
     const newPost = {
       username: user.username,
+      userId:user._id, 
       location,
       desc, rent, member, contact, locationDetails
     };
@@ -52,14 +54,35 @@ const AccWrite = () => {
             style={{ display: "none" }}
             onChange={(e) => setFile(e.target.files[0])}
           />
-          <input
+          {/* <input
             type="text"
             placeholder="Location"
             className="writeInput"
             autoFocus={true}
             onChange={e=>setLocation(e.target.value)}
-          />
+          /> */}
         </div>
+
+
+        <label for="Location">Choose a location:</label>
+  <select onChange={e=>setLocation(e.target.value)} name="Location" id="Location">
+    <option value="Sonapur">Sonapur</option>
+    <option value="Dotter Hat">Dotter Hat</option>
+    <option value="Roshid Colony">Roshid Colony</option>
+    <option value="Fokirpur">Fokirpur</option>
+    <option value="Garage">Garage</option>
+    <option value="Pouro Bajar">Pouro Bajar</option>
+    <option value="Boro Mosjid">Boro Mosjid</option>
+    <option value="Town Hall">Town Hall</option>
+    <option value="Housing">Housing</option>
+    <option value="Hospital Road">Hospital Road</option>
+    <option value="Bus Stand">Bus Stand</option>
+    <option value="Maijdee Bajar">Maijdee Bajar</option>
+  </select> 
+        
+      
+ 
+
         {/* <div className="writeFormGroup"> */}
         <input
             placeholder="Tell rent"
@@ -77,21 +100,23 @@ const AccWrite = () => {
             type="text"
             // className="writeInput writeText"
             onChange={e=>setContact(e.target.value)}
-          ></input>
+          ></input> <br />
         <textarea
             placeholder="Tell location details"
             type="text"
             // className="writeInput writeText"
             onChange={e=>setLocationDetails(e.target.value)}
-          ></textarea>
+          ></textarea>  <br />
           <textarea
             placeholder="Tell description"
             type="text"
             // className="writeInput writeText"
             onChange={e=>setDesc(e.target.value)}
-          ></textarea>
+          ></textarea> <br />
         {/* </div> */}
-        <button className="writeSubmit" type="submit">
+        {/* <button className="writeSubmit" type="submit"> */}
+
+        <button  type="submit">
           Publish
         </button>
       </form>

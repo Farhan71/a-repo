@@ -4,58 +4,59 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import {Context} from "../../../context/Context"
-import CommentBlock from '../../comment/CommentBlock';
 
-const AccSinglePost = () => {
-  const loc = useLocation();
-  const path = loc.pathname.split("/")[2];
-  const [post, setPost] = useState({});
-  const PF = "http://localhost:5000/images/";
-  const { user } = useContext(Context);
+const BldSinglePost = () => {
+    const loc = useLocation();
+    const path = loc.pathname.split("/")[2];
+    const [post, setPost] = useState({});
+    const PF = "http://localhost:5000/images/";
+    const { user } = useContext(Context);
 
-  const [location, setLocation] = useState("");
-  const [rent, setRent] = useState("");
-  const [member, setMember] = useState("");
-  const [contact, setContact] = useState("");
-  const [locationDetails, setLocationDetails] = useState("");
-  const [desc, setDesc] = useState("");
-  
-  const [updateMode, setUpdateMode] = useState(false);
+    
+    const [location, setLocation] = useState("");
+    const [group, setGroup] = useState("");
+    const [bags, setBags] = useState(""); 
+    const [time, setTime] = useState("");
+    const [contact, setContact] = useState("");
+    const [patientState, setPatientState] = useState("");
+    const [desc, setDesc] = useState("");
+    
+    const [updateMode, setUpdateMode] = useState(false);
 
-  useEffect(() => {
-    const getPost = async () => {
-      const res = await axios.get("/accommodations/" + path);
-      setPost(res.data);
-      setLocation(res.data.location);
-      setRent (res.data.rent);
-      setMember(res.data.member)
-      setContact(res.data.contact);
-      setLocationDetails (res.data.locationDetails)
-      setDesc(res.data.desc);
-    };
-    getPost();
-  }, [path]);
-
-  const handleDelete = async () => {
-    try {
-      await axios.delete(`/accommodations/${post._id}`, {
-        data: { username: user.username },
-      });
-      window.location.replace("/");
-    } catch (err) {}
-  };
-
-  const handleUpdate = async () => {
-    try {
-      await axios.put(`/accommodations/${post._id}`, {
-        username: user.username,
-        location,
-        desc, rent, member, contact, locationDetails
-      });
-      setUpdateMode(false)
-    } catch (err) {}
-  };
-
+    useEffect(() => {
+        const getPost = async () => {
+          const res = await axios.get("/blood/" + path);
+          setPost(res.data);
+          setLocation(res.data.location);
+          setGroup (res.data.group);
+          setTime(res.data.time)
+          setContact(res.data.contact);
+          setBags (res.data.bags)
+          setPatientState(res.data.patientState)
+          setDesc(res.data.desc);
+        };
+        getPost();
+      }, [path]);
+    
+      const handleDelete = async () => {
+        try {
+          await axios.delete(`/blood/${post._id}`, {
+            data: { username: user.username },
+          });
+          window.location.replace("/");
+        } catch (err) {}
+      };
+    
+      const handleUpdate = async () => {
+        try {
+          await axios.put(`/blood/${post._id}`, {
+            username: user.username,
+            location,
+            desc, time, bags, contact, group, patientState
+          });
+          setUpdateMode(false)
+        } catch (err) {}
+      };
     return (
         <div>
              <div className="singlePostWrapper">
@@ -65,14 +66,14 @@ const AccSinglePost = () => {
         {updateMode ? (
           <input
             type="text"
-            value={location}
+            value={group}
             className="singlePostTitleInput"
             autoFocus
             onChange={(e) => setLocation(e.target.value)}
           />
         ) : (
           <h1 className="singlePostTitle">
-            {location}
+            {group}
             {post.username === user?.username && (
               <div className="singlePostEdit">
                 <i
@@ -114,20 +115,20 @@ const AccSinglePost = () => {
 
                 <textarea
             className="singlePostDescInput"
-            value={locationDetails}
-            onChange={(e) => setLocationDetails(e.target.value)}
+            value={patientState}
+            onChange={(e) => setPatientState(e.target.value)}
           />
 
                 <textarea
             className="singlePostDescInput"
-            value={rent}
-            onChange={(e) => setRent(e.target.value)}
+            value={bags}
+            onChange={(e) => setBags(e.target.value)}
           />
 
                 <textarea
             className="singlePostDescInput"
-            value={member}
-            onChange={(e) => setMember(e.target.value)}
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
           />
 
                 <textarea
@@ -142,11 +143,11 @@ const AccSinglePost = () => {
             <div>
                <p className="singlePostDesc">{desc}</p>
                <p>{location}</p>
-               <p>{rent}</p>
-               <p>{member}</p>
+               <p>{time}</p>
+               <p>{bags}</p>
+               <p>{group}</p> 
                <p>{contact}</p>
-               <p>{locationDetails}</p>
-               <CommentBlock></CommentBlock>
+               <p>{patientState}</p>
             </div>
           
         )}
@@ -160,4 +161,4 @@ const AccSinglePost = () => {
     );
 };
 
-export default AccSinglePost;
+export default BldSinglePost;

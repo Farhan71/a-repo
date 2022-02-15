@@ -3,6 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import axios from "axios";
+import MyPosts from "../../components/myPosts/MyPosts";
 
 export default function Settings() {
   const [file, setFile] = useState(null);
@@ -17,7 +18,7 @@ export default function Settings() {
 
   const { user, dispatch } = useContext(Context);
   const PF = "http://localhost:5000/images/"
-
+  const userId = user._id 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -134,6 +135,7 @@ export default function Settings() {
         </form>
       </div>
       <Sidebar />
+      <MyPosts></MyPosts>
     </div>
   );
 }

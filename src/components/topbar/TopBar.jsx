@@ -51,7 +51,7 @@ export default function TopBar() {
                   <li><Link className="dropdown-item" to="/accessories">Other things</Link></li>
                 </ul>
             </li>
-            <li><Link className="dropdown-item" to="/bloodfinding">Blood Finding</Link></li>
+            <li><Link className="dropdown-item" to="/blood">Blood Finding</Link></li>
             <li><Link className="dropdown-item" to="/entrepreneur">Entrepreneur</Link></li>
             <li><Link className="dropdown-item" to="/reports">Reporters</Link></li>
           </ul>

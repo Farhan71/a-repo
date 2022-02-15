@@ -3,29 +3,102 @@ import AccPosts from "./AccPosts"
 import AccWrite from "./AccWrite"
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { useLocation } from "react-router";
+import { useLocation } from "react-router";
 const AccPage = () => {
-    const [posts, setPosts] = useState([]);
-    // const { search } = useLocation();
   
+
+  // console.log(location.search)
+  
+    const [posts, setPosts] = useState([]);
+    let [filter, setFilter] = useState([]);
+    const [filterPosts, setFilterPosts] = useState([]);
+    
+    useLocation().search = filter
+    // console.log(useLocation())
+      // console.log(location)
+    // search = filter; 
+
     useEffect(() => {
       const fetchPosts = async () => {
         const res = await axios.get("/accommodations");
+        console.log(res)
         setPosts(res.data);
       };
       fetchPosts();
     }, []);
+
+
+    // const { search } = useLocation();
+  
+    useEffect(() => {
+      const fetchFilterPosts = async () => {
+        const res = await axios.get(`/accommodations/?location=${filter}`);
+        console.log(res)
+        setFilterPosts(res.data)
+      };
+      fetchFilterPosts();
+    },[filter])
+
+    // console.log (search)
+    // console.log (filter)
+    console.log (filterPosts)
+    
+
+  
+
+    
     return (
-        <div className="row">
-            <div className="col-6">
-            <AccPosts posts={posts}></AccPosts>
+      <> 
+
+            <label for="Location">Choose a location:</label>
+                    <select onChange={(e) =>  {
+                      filter="";
+                      setFilter(e.target.value)    
+
+                    }
+                    
+                    } name="Location" id="Location">
+                      <option value="Sonapur">Sonapur</option>
+                      <option value="Dotter Hat">Dotter Hat</option>
+                      <option value="Roshid Colony">Roshid Colony</option>
+                      <option value="Fokirpur">Fokirpur</option>
+                      <option value="Garage">Garage</option>
+                      <option value="Pouro Bajar">Pouro Bajar</option>
+                      <option value="Boro Mosjid">Boro Mosjid</option>
+                      <option value="Town Hall">Town Hall</option>
+                      <option value="Housing">Housing</option>
+                      <option value="Hospital Road">Hospital Road</option>
+                      <option value="Bus Stand">Bus Stand</option>
+                      <option value="Maijdee Bajar">Maijdee Bajar</option>
+                    </select> 
+         
+      
+      
+
+            <div className="row">
+                    <div className="col-6">
+
+                      {
+                        filter ? (<AccPosts posts={filterPosts}></AccPosts>) : (<AccPosts posts={posts}></AccPosts>)
+                      }
+
+{/* <AccPosts posts={posts}></AccPosts> */}
+                    
+                    </div>
+                    <div className="col-6">
+                    <AccWrite></AccWrite>
             </div>
-            <div className="col-6">
-            <AccWrite></AccWrite>
-            </div>
+           
             
+                  
+             
+              
+            
+           
             
         </div>
+      </>
+        
     );
 };
 

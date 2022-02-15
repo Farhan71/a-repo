@@ -1,14 +1,14 @@
 import React from 'react';
-import AccPost from "./AccPost"
+import EntPost from './EntPost';
 
-const accPosts = ({posts}) => {
+const EntPosts = ({posts}) => {
     return (
         <div className="container"> 
             {posts.map((p) => (
-        <AccPost post={p} />
+        <EntPost post={p}></EntPost>
       ))}
         </div>
     );
 };
 
-export default accPosts;
+export default EntPosts;
