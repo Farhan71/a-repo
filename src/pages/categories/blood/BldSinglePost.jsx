@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import {Context} from "../../../context/Context"
+import CommentBlock from '../../comment/CommentBlock';
 
 const BldSinglePost = () => {
     const loc = useLocation();
@@ -58,12 +59,14 @@ const BldSinglePost = () => {
         } catch (err) {}
       };
     return (
-        <div>
+        <div style={{border: '1px solid red', width: '400px'}}>
              <div className="singlePostWrapper">
-        {post.photo && (
-          <img src={PF + post.photo} alt="" className="singlePostImg" />
-        )}
+             {post.photo ? 
+        (<img src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" className="singlePostImg" /> ):
+          <img src="https://previews.123rf.com/images/laracold/laracold1706/laracold170600015/80321483-creative-blood-motivation-information-donor-poster-blood-donation-world-blood-donor-day-banner-red-b.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
         {updateMode ? (
+          <div>
+            <h1>Group: </h1>
           <input
             type="text"
             value={group}
@@ -71,9 +74,10 @@ const BldSinglePost = () => {
             autoFocus
             onChange={(e) => setLocation(e.target.value)}
           />
+          </div>
         ) : (
           <h1 className="singlePostTitle">
-            {group}
+            Group: {group}
             {post.username === user?.username && (
               <div className="singlePostEdit">
                 <i
@@ -90,48 +94,56 @@ const BldSinglePost = () => {
         )}
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author:
+            Posted By:
             <Link to={`/${post.username}`} className="link">
-              <b> {post.username}</b>
+              <b>  {post.username}</b>
             </Link>
-          </span>
+          </span> 
+          <p> At: 
           <span className="singlePostDate">
             {new Date(post.createdAt).toDateString()}
           </span>
+          </p>
+         
         </div>
         {updateMode ? (
-            <div>
+            <div> 
+              
+              <h6>Location: </h6> <textarea
+            className="singlePostDescInput"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          /> <br />
+
+            <h6>Date and Time: </h6> <textarea
+            className="singlePostDescInput"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+          /> <br />
+
+          <h6>Bags: </h6>  <textarea
+            className="singlePostDescInput"
+            value={bags}
+            onChange={(e) => setBags(e.target.value)}
+          /> <br />
+              
+              
+              <h6>Patient State: </h6>  <textarea
+            className="singlePostDescInput"
+            value={patientState}
+            onChange={(e) => setPatientState(e.target.value)}
+          /> <br />
+
+            <h6>Descriptions</h6>
                 <textarea
             className="singlePostDescInput"
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
-          />
+          /> <br />
 
-                <textarea
-            className="singlePostDescInput"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
+                
 
-                <textarea
-            className="singlePostDescInput"
-            value={patientState}
-            onChange={(e) => setPatientState(e.target.value)}
-          />
-
-                <textarea
-            className="singlePostDescInput"
-            value={bags}
-            onChange={(e) => setBags(e.target.value)}
-          />
-
-                <textarea
-            className="singlePostDescInput"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
-
-                <textarea
+              <h6>Contact: </h6>  <textarea
             className="singlePostDescInput"
             value={contact}
             onChange={(e) => setContact(e.target.value)}
@@ -141,13 +153,14 @@ const BldSinglePost = () => {
           
         ) : (
             <div>
-               <p className="singlePostDesc">{desc}</p>
-               <p>{location}</p>
-               <p>{time}</p>
-               <p>{bags}</p>
-               <p>{group}</p> 
-               <p>{contact}</p>
-               <p>{patientState}</p>
+               
+               <p> Location: {location}</p>
+               <p> Date and Time: {time}</p>
+               <p> Bags: {bags}</p>
+               <p> Patient State: {patientState}</p>
+               <p className="singlePostDesc"> Descriptions: {desc}</p>
+               <p> Contact: {contact}</p>
+               <CommentBlock></CommentBlock>
             </div>
           
         )}

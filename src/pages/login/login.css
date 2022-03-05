@@ -58,7 +58,7 @@
   color: white;
   border-radius: 10px;
 } */
-label, input {
+/* label, input {
   font-size: 12px;
 }
 input {
@@ -90,4 +90,34 @@ input {
   position: absolute;
   top: 16px;
   right: 16px;
+} */
+
+.login {
+  font-family: 'Poppins', sans-serif; 
+  background-color: #f4f4f4;
+  margin: 0px;
+  padding: 100px;
+}
+.login-title {
+  font-size: 18px;
+  margin: 0px auto; 
+}
+.login-body{
+  font-size: 10px;
+  background-color: white;
+  height: 200px;
+  width: 300px;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 15px;
+
+}
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #27395E;
+  border-color: #27395E; 
+}
+.btn-outline-primary {
+  
+  border-color: #27395E; 
 }

@@ -15,17 +15,18 @@ const OtherThingsPost = ({post}) => {
           ))}
         </div> */}
         <Link to={`/accessoriesPost/${post._id}`} className="link">
-          <span className="postTitle">{post.type}</span>
+          <span className="postTitle">Type: {post.type}</span>
         </Link>
         <hr />
         <span className="postDate">
           {new Date(post.createdAt).toDateString()}
         </span>
       </div>
-      <p className="postDesc">{post.desc}</p>
-      <p className="postDesc">{post.quantity}</p>
-      <p className="postDesc">{post.price}</p>
-      <p className="postDesc">{post.contact}</p>
+      
+      <p className="postDesc">Quantity: {post.quantity}</p>
+      <p className="postDesc">Price: {post.price}</p> 
+      <p className="postDesc">Descriptions:{post.desc}</p>
+      <p className="postDesc">Contact: {post.contact}</p>
         </div>
         <br />
         </>

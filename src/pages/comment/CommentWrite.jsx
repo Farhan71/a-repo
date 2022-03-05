@@ -11,6 +11,7 @@ const CommentWrite = ({postID}) => {
         e.preventDefault();
         const newPost = {
           username: user.username,
+          userId:user._id,
           desc, postID: postID,  
         };
         try {

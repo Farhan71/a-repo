@@ -41,7 +41,7 @@ const AccWrite = () => {
     return (
         <div className="write container">
       {file && (
-        <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
+        <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
       )}
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
@@ -84,6 +84,12 @@ const AccWrite = () => {
  
 
         {/* <div className="writeFormGroup"> */}
+        <textarea
+            placeholder="Tell location details"
+            type="text"
+            // className="writeInput writeText"
+            onChange={e=>setLocationDetails(e.target.value)}
+          ></textarea>  <br />
         <input
             placeholder="Tell rent"
             type="text"
@@ -95,24 +101,21 @@ const AccWrite = () => {
             // className="writeInput writeText"
             onChange={e=>setMember(e.target.value)}
           ></input>
-          <input
-            placeholder="Tell contact"
-            type="text"
-            // className="writeInput writeText"
-            onChange={e=>setContact(e.target.value)}
-          ></input> <br />
-        <textarea
-            placeholder="Tell location details"
-            type="text"
-            // className="writeInput writeText"
-            onChange={e=>setLocationDetails(e.target.value)}
-          ></textarea>  <br />
+         
+        
           <textarea
             placeholder="Tell description"
             type="text"
             // className="writeInput writeText"
             onChange={e=>setDesc(e.target.value)}
           ></textarea> <br />
+
+            <input
+            placeholder="Tell contact"
+            type="text"
+            // className="writeInput writeText"
+            onChange={e=>setContact(e.target.value)}
+          ></input> <br />
         {/* </div> */}
         {/* <button className="writeSubmit" type="submit"> */}
 

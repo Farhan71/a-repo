@@ -21,11 +21,11 @@ const Profile = () => {
     // console.log(id[1]);
     return (
         <div>
-            <h1>{user.username}</h1>
-            <h1>{user.email}</h1>
-            <h1>{user.contact}</h1>
-            <h1>{user.studentId}</h1>
-            <h1>{user.bloodGroup}</h1>
+            <h1>Username: {user.username}</h1>
+            <h1>Email: {user.email}</h1>
+            <h1>Contact Number: {user.contact}</h1>
+            <h1>Student ID: {user.studentId}</h1>
+            <h1>Blood Group: {user.bloodGroup}</h1>
         </div>
     );
 };

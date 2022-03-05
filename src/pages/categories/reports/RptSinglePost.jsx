@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import {Context} from "../../../context/Context"
+import CommentBlock from '../../comment/CommentBlock';
 
 const RptSinglePost = () => {
     const loc = useLocation();
@@ -47,19 +48,22 @@ const RptSinglePost = () => {
     } catch (err) {}
   };
     return (
-        <div>
+        <div style={{border: '1px solid red', height: '450px', width: '400px'}}>
         <div className="singlePostWrapper">
-   {post.photo && (
-     <img src={PF + post.photo} alt="" className="singlePostImg" />
-   )}
+        {post.photo ? 
+        (<img src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" className="singlePostImg" /> ):
+          <img src="https://www.via-ks.com/wp-content/uploads/2017/01/news-images-3.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
    {updateMode ? (
-     <input
+     <div>
+       <h1>Title: </h1>
+       <input
        type="text"
        value={title}
        className="singlePostTitleInput"
        autoFocus
        onChange={(e) => setTitle(e.target.value)}
      />
+     </div>
    ) : (
      <h1 className="singlePostTitle">
        {title}
@@ -79,29 +83,32 @@ const RptSinglePost = () => {
    )}
    <div className="singlePostInfo">
      <span className="singlePostAuthor">
-       Author:
+       Posted By: 
        <Link to={`/${post.username}`} className="link">
          <b> {post.username}</b>
        </Link>
      </span>
+     <p> At: 
      <span className="singlePostDate">
        {new Date(post.createdAt).toDateString()}
      </span>
+     </p>
    </div>
    {updateMode ? (
        <div>
-           <textarea
+          <h6>Descriptions: </h6> <textarea
        className="singlePostDescInput"
        value={desc}
-       onChange={(e) => setDesc(e.target.value)}
-     />
+       onChange={(e) => setDesc(e.target.value)} 
+     /> <br />
        </div>
      
      
    ) : (
        <div>
+         
           <p className="singlePostDesc">{desc}</p>
-          <p>{title}</p>
+          <CommentBlock></CommentBlock>
        </div>
      
    )}

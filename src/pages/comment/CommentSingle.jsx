@@ -55,7 +55,7 @@ const CommentSingle = ({comment}) => {
     //     </div>
 
 
-    <div>
+    <div style={{border: '1px solid blue', height: '150px', width: '350px', marginTop:"50px"}}>
     <div className="singlePostWrapper">
 {updateMode ? (
 //  <input
@@ -85,14 +85,16 @@ const CommentSingle = ({comment}) => {
 )}
 <div className="singlePostInfo">
  <span className="singlePostAuthor">
-   Author:
+   Commented By:
    <Link to={`/${comment.username}`} className="link">
      <b> {comment.username}</b>
    </Link>
  </span>
- <span className="singlePostDate">
+ <p>
+   At: <span className="singlePostDate">
    {new Date(comment.createdAt).toDateString()}
  </span>
+ </p>
 </div>
 {updateMode ? (
    <div>
@@ -107,9 +109,10 @@ const CommentSingle = ({comment}) => {
  
  
 ) : (
-   <div>
-      <p className="singlePostDesc">{desc}</p>
-   </div>
+  //  <div>
+  //     <p className="singlePostDesc">{desc}</p>
+  //  </div> 
+  ""
  
 )}
 {updateMode && (

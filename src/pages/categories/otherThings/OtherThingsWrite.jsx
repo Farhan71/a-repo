@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import {Context } from '../../../context/Context';
 
+
 const OtherThingsWrite = () => {
     const [type, setType] = useState("");
     const [price, setPrice] = useState("");
@@ -16,6 +17,7 @@ const OtherThingsWrite = () => {
         e.preventDefault();
         const newPost = {
           username: user.username,
+          userId:user._id,
           type,
           desc, quantity, price, contact
         };
@@ -37,7 +39,7 @@ const OtherThingsWrite = () => {
     return (
         <div className="write container">
         {file && (
-          <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
+          <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
         )}
         <form className="writeForm" onSubmit={handleSubmit}>
           <div className="writeFormGroup">
@@ -50,15 +52,38 @@ const OtherThingsWrite = () => {
               style={{ display: "none" }}
               onChange={(e) => setFile(e.target.files[0])}
             />
-            <input
+            {/* <input
               type="text"
               placeholder="Type"
               className="writeInput"
               autoFocus={true}
               onChange={e=>setType(e.target.value)}
-            />
+            /> */}
           </div>
           {/* <div className="writeFormGroup"> */}
+
+          <label for="Type">Choose a type:</label>
+                    <select onChange={(e) =>  {
+                      
+                      setType(e.target.value)    
+
+                    }
+                    
+                    } name="Type" id="Type">
+                      <option value="Table">Table</option>
+                      <option value="Chair">Chair</option>
+                      <option value="Stove"> Stove</option>
+                      <option value="Ceiling Fan">Ceiling Fan</option>
+                      <option value="Table Fan">Table Fan</option>
+                      <option value="Rack"> Rack</option>
+                      <option value="Book Shelf"> Book Shelf</option>
+                      <option value="tShirt"> tShirt</option>
+                      <option value="Hoodie">Hoodie</option>
+                      <option value="Jersey"> Jersey</option>
+                      <option value="Mobile">Mobile</option>
+                      <option value="Laptop">Laptop</option>
+                    </select> 
+
           <input
               placeholder="Tell quantity"
               type="text"
@@ -70,6 +95,12 @@ const OtherThingsWrite = () => {
               // className="writeInput writeText"
               onChange={e=>setPrice(e.target.value)}
             ></input>
+            <textarea
+              placeholder="Tell description"
+              type="text"
+              // className="writeInput writeText"
+              onChange={e=>setDesc(e.target.value)}
+            ></textarea> <br />
             <input
               placeholder="Tell contact"
               type="text"
@@ -77,12 +108,7 @@ const OtherThingsWrite = () => {
               onChange={e=>setContact(e.target.value)}
             ></input> <br />
          
-            <textarea
-              placeholder="Tell description"
-              type="text"
-              // className="writeInput writeText"
-              onChange={e=>setDesc(e.target.value)}
-            ></textarea> <br />
+            
           {/* </div> */}
           {/* <button className="writeSubmit" type="submit"> */}
   

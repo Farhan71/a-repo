@@ -18,6 +18,7 @@ const BookWrite = () => {
       e.preventDefault();
       const newPost = {
         username: user.username,
+        userId:user._id,
         bookName, bookAuthor, quantity, department, price, 
         desc,  contact
       };
@@ -39,7 +40,7 @@ const BookWrite = () => {
     return (
         <div className="write container">
       {file && (
-        <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
+        <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
       )}
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
@@ -52,15 +53,40 @@ const BookWrite = () => {
             style={{ display: "none" }}
             onChange={(e) => setFile(e.target.files[0])}
           />
-          <input
-            type="text"
-            placeholder="Book Name"
-            className="writeInput"
-            autoFocus={true}
-            onChange={e=>setBookName(e.target.value)}
-          />
+        
         </div>
         {/* <div className="writeFormGroup"> */}
+
+        <label for="Department">Choose a department:</label>
+                    <select onChange={(e) =>  {
+                      
+                      setDepartment(e.target.value)    
+
+                    }
+                    
+                    } name="Department" id="Department">
+                      <option value="CSTE">CSTE</option>
+                      <option value="FIMS">FIMS</option>
+                      <option value="Pharmacy">Pharmacy</option>
+                      <option value="ACCE">ACCE</option>
+                      <option value="Microbiology">Microbiology</option>
+                      <option value="English">English</option>
+                      <option value="BBA">BBA</option>
+                      <option value="ICE">ICE</option>
+                      <option value="FTNS">FTNS</option>
+                      <option value="ESDM">ESDM</option>
+                      <option value="Economics">Economics</option>
+                      <option value="Agriculture">Agriculture</option>
+                      <option value="Applied Math">Applied Math</option>
+                      <option value="EEE">EEE</option>
+                      <option value="SWE">SWE</option>
+                    </select> 
+
+            <input
+            type="text"
+            placeholder="Book Name"
+            onChange={e=>setBookName(e.target.value)}
+          /> <br />
         <input
             placeholder="Tell Book Author"
             type="text"
@@ -81,18 +107,8 @@ const BookWrite = () => {
             onChange={e=>setPrice(e.target.value)}
           ></input>
           
-          <input
-            placeholder="Tell contact"
-            type="text"
-            // className="writeInput writeText"
-            onChange={e=>setContact(e.target.value)}
-          ></input> <br />
-        <textarea
-            placeholder="Tell department"
-            type="text"
-            // className="writeInput writeText"
-            onChange={e=>setDepartment(e.target.value)}
-          ></textarea> <br />
+          
+         
           <textarea
             placeholder="Tell description"
             type="text"
@@ -100,6 +116,13 @@ const BookWrite = () => {
             onChange={e=>setDesc(e.target.value)}
           ></textarea>
           <br />
+
+          <input
+            placeholder="Tell contact"
+            type="text"
+            // className="writeInput writeText"
+            onChange={e=>setContact(e.target.value)}
+          ></input> <br />
         {/* </div> */}
         {/* <button className="writeSubmit" type="submit"> */}
 

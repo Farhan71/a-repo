@@ -28,8 +28,11 @@
   color: #444;
   cursor: pointer;
 } */
+.navbar {
+  background-color: #27395E;
+}
 .navbar-brand{
-  height: 50px;
+  height: 60px;
 }
 
 .navbar-nav{
@@ -85,3 +88,8 @@
   display: block;
 }
 
+/* .navbar-toggler-icon {
+  color: #ffff00;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#ffff00' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+} */
+.navbar-toggler { border-color: none; }

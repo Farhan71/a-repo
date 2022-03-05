@@ -4,8 +4,8 @@ import { useContext, useRef } from "react";
 import { Context } from "../../context/Context";
 import "./login.css";
 
-export default function Login(props) {
-  const userRef = useRef();
+const Login = () => {
+  const emailRef = useRef();
   const passwordRef = useRef();
   const { dispatch, isFetching } = useContext(Context);
 
@@ -14,38 +14,40 @@ export default function Login(props) {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post("/auth/login", {
-        username: userRef.current.value,
+        email: emailRef.current.value,
         password: passwordRef.current.value,
       });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      window.location.replace("/");
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE" });
     }
   };
 
-  return (props.trigger) ? (
-    <div className="popup">
-      <div className="login container popup-inner"> 
-      <button className="close-btn" onClick={()=>props.setTrigger(false) } >close</button>
-      <span className="loginTitle">Login</span> <br />
-      <form className="loginForm" onSubmit={handleSubmit}>
+  return  (
+    <div className="d-flex align-items-center justify-content-center login">
+      <div className="login-body"> 
+      <span className="login-title">Login</span> <br />
+      <form  onSubmit={handleSubmit}>
         {/* <label>Username</label> */}
         <input
           type="text"
-          className="loginInput"
-          placeholder="Enter your username..."
-          ref={userRef}
+          className="form-control"
+          placeholder="Enter your email..."
+          ref={emailRef}
         /> <br />
         {/* <label>Password</label><br /> */}
         <input
           type="password"
-          className="loginInput"
+          className="form-control"
           placeholder="Enter your password..."
           ref={passwordRef}
         /> <br />
-        <button className="loginButton" type="submit" disabled={isFetching}>
+        <div className="text-center md-5">
+        <button className="btn btn-outline-primary " type="submit" disabled={isFetching}>
           Login
         </button>
+        </div>
       </form> 
       {/* <p>Don't have an account?</p> */}
       {/* <button>
@@ -55,5 +57,6 @@ export default function Login(props) {
       </button> */}
     </div>
     </div>
-  ) : "";
+  ) 
 }
+export default Login

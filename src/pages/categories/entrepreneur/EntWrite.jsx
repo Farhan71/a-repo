@@ -20,6 +20,7 @@ const EntWrite = () => {
         e.preventDefault();
         const newPost = {
           username: user.username,
+          userId:user._id,
           locationRange,
          desc, price, quantity, contact, startUpName, startUpType, productType
         };
@@ -42,7 +43,7 @@ const EntWrite = () => {
     return (
         <div className="write container">
         {file && (
-          <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
+          <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
         )}
         <form className="writeForm" onSubmit={handleSubmit}>
           <div className="writeFormGroup">
@@ -75,12 +76,7 @@ const EntWrite = () => {
               // className="writeInput writeText"
               onChange={e=>setProductType(e.target.value)}
             ></input>
-            <input
-              placeholder="Tell contact"
-              type="text"
-              // className="writeInput writeText"
-              onChange={e=>setContact(e.target.value)}
-            ></input> <br />
+            
             <input
               placeholder="Tell price"
               type="text"
@@ -105,6 +101,12 @@ const EntWrite = () => {
               // className="writeInput writeText"
               onChange={e=>setDesc(e.target.value)}
             ></textarea> <br />
+            <input
+              placeholder="Tell contact"
+              type="text"
+              // className="writeInput writeText"
+              onChange={e=>setContact(e.target.value)}
+            ></input> <br />
           {/* </div> */}
           {/* <button className="writeSubmit" type="submit"> */}
   

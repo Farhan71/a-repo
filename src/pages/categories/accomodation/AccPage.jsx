@@ -88,14 +88,7 @@ const AccPage = () => {
                     <div className="col-6">
                     <AccWrite></AccWrite>
             </div>
-           
-            
-                  
-             
-              
-            
-           
-            
+   
         </div>
       </>
         

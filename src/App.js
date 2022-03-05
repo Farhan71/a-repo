@@ -4,11 +4,10 @@
 // import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Home from "./pages/home/Home";
 import TopBar from "./components/topbar/TopBar";
+import Footer from "./components/footer/Footer.jsx"
 // import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 import Settings from "./pages/settings/Settings";
-// import Login from "./pages/login/Login";
-// import Register from "./pages/register/Register";
 import AccPage from "./pages/categories/accomodation/AccPage";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import { useContext } from "react";
@@ -18,6 +17,7 @@ import BookPage from "./pages/categories/book/BookPage";
 import BookSinglePost from "./pages/categories/book/BookSinglePost";
 import Profile from "./pages/profile/Profile";
 import LandingPage from "./pages/landingPage/LandingPage";
+import Contact from "./pages/contact/Contact.jsx";
 import OtherThingsPage from "./pages/categories/otherThings/OtherThingsPage";
 import OtherThingsSinglePost from "./pages/categories/otherThings/OtherThingsSinglePost";
 import BldPage from "./pages/categories/blood/BldPage";
@@ -27,20 +27,28 @@ import EntSinglePost from "./pages/categories/entrepreneur/EntSinglePost";
 import RptPage from "./pages/categories/reports/RptPage";
 import RptSinglePost from "./pages/categories/reports/RptSinglePost";
 import accFilter from "./pages/categories/accomodation/accFilter";
+import Register from "./pages/register/Register";
+import Login from "./pages/login/Login";
+import OtpVerify from "./pages/OtpVerify/OtpVerify";
+import LogoHeader from "./components/logo-header/LogoHeader";
+import UnregisteredNav from "./components/unregistred-nav/UnregisteredNav";
 
 function App() {
   const { user } = useContext(Context);
   return (
     <Router>
-      <TopBar />
+      <LogoHeader></LogoHeader> 
+      {
+        user ? <TopBar /> : <UnregisteredNav></UnregisteredNav>
+      }
+      
       <Switch>
-        <Route exact path="/">
-        {/* {user ? <Home /> : <Register />} */}
-        {user ? <Home /> : <LandingPage/>}
-        </Route>
-        {/* <Route path="/register">{user ? <Home /> : <LandingPage/>}</Route>
-        <Route path="/login">{user ? <Home /> : <LandingPage/>}</Route> */}
+        <Route exact path="/">{user ? <Home /> : <LandingPage/>}</Route>
+        <Route path="/register"> <Register/></Route>
+        <Route path="/login"> <Login/></Route>
+        <Route path="/otpVerify/:id"> <OtpVerify></OtpVerify></Route>
         <Route path="/write">{user ? <Write /> : <LandingPage/>}</Route>
+        <Route path="/contact">{user ? <Contact /> : <LandingPage/>}</Route>
         <Route path="/settings">{user ? <Settings /> : <LandingPage/>}</Route>
         <Route path="/accommodation">{user ? <AccPage /> : <LandingPage/>}</Route>
         <Route path="/accessories">{user ? <OtherThingsPage/> : <LandingPage/>}</Route>
@@ -80,6 +88,7 @@ function App() {
         </Route>
 
       </Switch>
+      <Footer></Footer>
     </Router>
   );
 }

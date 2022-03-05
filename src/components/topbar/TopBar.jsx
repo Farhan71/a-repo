@@ -12,11 +12,13 @@ export default function TopBar() {
     dispatch({ type: "LOGOUT" });
   };
   return (
-    <nav className="container navbar navbar-expand-lg navbar-light bg-light">
-  <div className="container-fluid">
+    <nav className=" navbar navbar-expand-lg ">
+  <div className="container">
     <img src={logo} className="navbar-brand" alt="" />
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
+      <span className="navbar-toggler-icon">
+      <i class="fas fa-bars" style={{color:"#fff", fontSize:"28px"}}></i>
+        </span>
     </button>
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
       <ul className="navbar-nav">
@@ -34,7 +36,7 @@ export default function TopBar() {
           </li>
 
          <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/contact">
               Contact
             </Link>
           </li>
@@ -48,7 +50,7 @@ export default function TopBar() {
             <li><Link className="dropdown-item" to="/">RecycleBin &raquo;</Link>
                 <ul className="dropdown-menu dropdown-submenu">
                   <li><Link className="dropdown-item" to="/book">Books</Link></li>
-                  <li><Link className="dropdown-item" to="/accessories">Other things</Link></li>
+                  <li><Link className="dropdown-item" to="/accessories">Accessories</Link></li>
                 </ul>
             </li>
             <li><Link className="dropdown-item" to="/blood">Blood Finding</Link></li>
@@ -57,11 +59,11 @@ export default function TopBar() {
           </ul>
         </li>
 
-        <li className="nav-item">
+        {/* <li className="nav-item">
             <Link className="nav-link"  to="/write">
               Write
             </Link>
-          </li>
+          </li> */}
 
           <li className="nav-item" onClick={handleLogout}>
             {user && <Link className="nav-link"  to="/">
@@ -93,10 +95,10 @@ export default function TopBar() {
         )}
         {/* <i className="topSearchIcon fas fa-search"></i> */}
       </ul>
-      <form class="d-flex">
+      {/* <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button class="btn btn-outline-info" type="submit"><i className="topSearchIcon fas fa-search"></i></button>
-      </form>
+      </form> */}
     </div>
   </div>
 </nav>

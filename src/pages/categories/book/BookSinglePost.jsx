@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import {Context} from "../../../context/Context"
+import CommentBlock from '../../comment/CommentBlock';
 
 const BookSinglePost = () => {
     const loc = useLocation();
@@ -56,22 +57,25 @@ const BookSinglePost = () => {
     } catch (err) {}
   };
     return (
-        <div>
+        <div style={{border: '1px solid red', height: '600px', width: '400px'}}>
              <div className="singlePostWrapper">
-        {post.photo && (
-          <img src={PF + post.photo} alt="" className="singlePostImg" />
-        )}
+             {post.photo ? 
+        (<img src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" className="singlePostImg" /> ):
+          <img src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
         {updateMode ? (
-          <input
+          <div>
+            <h1>Book Name: </h1>
+            <input
             type="text"
             value={bookName}
             className="singlePostTitleInput"
             autoFocus
             onChange={(e) => setBookName(e.target.value)}
           />
+          </div>
         ) : (
           <h1 className="singlePostTitle">
-            {bookName}
+            Book Name : {bookName}
             {post.username === user?.username && (
               <div className="singlePostEdit">
                 <i
@@ -88,63 +92,72 @@ const BookSinglePost = () => {
         )}
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author:
+            Posted By:
             <Link to={`/${post.username}`} className="link">
               <b> {post.username}</b>
             </Link>
           </span>
+          <p> At:
           <span className="singlePostDate">
             {new Date(post.createdAt).toDateString()}
           </span>
+          </p>
         </div>
         {updateMode ? (
             <div>
-                <textarea
-            className="singlePostDescInput"
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
-          />
+              
 
-                <textarea
+              <h6>Book Author: </h6>  <textarea
             className="singlePostDescInput"
             value={bookAuthor}
             onChange={(e) => setBookAuthor(e.target.value)}
-          />
+          /> <br />
 
-                <textarea
-            className="singlePostDescInput"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-          />
-
-                <textarea
-            className="singlePostDescInput"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-
-                <textarea
+<h6>Department: </h6>  <textarea
             className="singlePostDescInput"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
-          />
+          /> <br />
 
-                <textarea
+              <h6>Quantity: </h6>  <textarea
+            className="singlePostDescInput"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          /> <br />
+
+              <h6>Price: </h6>  <textarea
+            className="singlePostDescInput"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          /> <br />
+
+
+          <h6>Description: </h6>  <textarea
+            className="singlePostDescInput"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+          /> <br />
+              
+
+              <h6>Contact: </h6>  <textarea
             className="singlePostDescInput"
             value={contact}
             onChange={(e) => setContact(e.target.value)}
-          />
+          /> <br />
             </div>
           
           
         ) : (
             <div>
-               <p className="singlePostDesc">{desc}</p>
-               <p>{bookAuthor}</p>
-               <p>{price}</p>
-               <p>{quantity}</p>
-               <p>{contact}</p>
-               <p>{department}</p>
+               
+               <p>Book Author: {bookAuthor}</p>
+               <p>Department: {department}</p>
+               <p>Quantity: {quantity}</p>
+               <p>Price: {price}</p>
+               <p className="singlePostDesc">Description: {desc}</p>
+               <p>Contact: 0{contact}</p>
+               
+               <CommentBlock></CommentBlock>
             </div>
           
         )}

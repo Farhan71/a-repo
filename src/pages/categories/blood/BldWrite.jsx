@@ -19,6 +19,7 @@ const BldWrite = () => {
         e.preventDefault();
         const newPost = {
           username: user.username,
+          userId:user._id, 
           location,
           desc, group, time, bags, patientState, contact
         };
@@ -40,7 +41,7 @@ const BldWrite = () => {
     return (
         <div className="write container">
         {file && (
-          <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
+          <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
         )}
         <form className="writeForm" onSubmit={handleSubmit}>
           <div className="writeFormGroup">
@@ -53,50 +54,74 @@ const BldWrite = () => {
               style={{ display: "none" }}
               onChange={(e) => setFile(e.target.files[0])}
             />
-            <input
-              type="text"
-              placeholder="Location"
+            {/* <input
+               placeholder="Tell group"
+               type="text"
               className="writeInput"
               autoFocus={true}
-              onChange={e=>setLocation(e.target.value)}
-            />
+              onChange={e=>setGroup(e.target.value)}
+            /> */}
           </div>
           {/* <div className="writeFormGroup"> */}
+
+
+          <label for="Group">Blood Group:</label>
+                    <select onChange={(e) =>  {setGroup(e.target.value)    
+
+                    }
+                    
+                    } name="Group" id="Group">
+                      <option value="A Positive">A+</option>
+                      <option value="A Negative">A-</option>
+                      <option value="B Positive">B+</option>
+                      <option value="B Negative">B-</option>
+                      <option value="AB Positive">AB+</option>
+                      <option value="AB Negative">AB-</option>
+                      <option value="O Positive">O+</option>
+                      <option value="O Negative">O-</option>
+                    </select> 
+
+
           <input
-              placeholder="Tell group"
+             
               type="text"
-              onChange={e=>setGroup(e.target.value)}
+              placeholder="Location"
+              onChange={e=>setLocation(e.target.value)}
             ></input>
-            <input
-              placeholder="Tell Bags"
-              type="text"
-              // className="writeInput writeText"
-              onChange={e=>setBags(e.target.value)}
-            ></input>
-            <input
-              placeholder="Tell contact"
-              type="text"
-              // className="writeInput writeText"
-              onChange={e=>setContact(e.target.value)}
-            ></input> <br />
             <input
               placeholder="Tell time"
               type="text"
               // className="writeInput writeText"
               onChange={e=>setTime(e.target.value)}
             ></input> <br />
-          <textarea
+            <input
+              placeholder="Tell Bags"
+              type="text"
+              // className="writeInput writeText"
+              onChange={e=>setBags(e.target.value)}
+            ></input>
+            <textarea
               placeholder="Tell patient State"
               type="text"
               // className="writeInput writeText"
               onChange={e=>setPatientState(e.target.value)}
             ></textarea>  <br />
+            
+            
+          
             <textarea
               placeholder="Tell description"
               type="text"
               // className="writeInput writeText"
               onChange={e=>setDesc(e.target.value)}
             ></textarea> <br />
+
+              <input
+              placeholder="Tell contact"
+              type="text"
+              // className="writeInput writeText"
+              onChange={e=>setContact(e.target.value)}
+            ></input> <br />
           {/* </div> */}
           {/* <button className="writeSubmit" type="submit"> */}
   

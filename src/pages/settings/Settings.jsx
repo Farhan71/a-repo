@@ -20,6 +20,17 @@ export default function Settings() {
   const PF = "http://localhost:5000/images/"
   const userId = user._id 
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.delete(`/users/${user._id}`)
+      // dispatch({ type: "LOGOUT" });
+      // window.location.replace("/")
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: "UPDATE_START" });
@@ -52,7 +63,7 @@ export default function Settings() {
       <div className="settingsWrapper">
         <div className="settingsTitle">
           <span className="settingsUpdateTitle">Update Your Account</span>
-          <span className="settingsDeleteTitle">Delete Account</span>
+          {/* <span className="settingsDeleteTitle" onClick={handleDelete}>Delete Account</span> */}
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Profile Picture</label>
@@ -134,7 +145,7 @@ export default function Settings() {
           )}
         </form>
       </div>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <MyPosts></MyPosts>
     </div>
   );

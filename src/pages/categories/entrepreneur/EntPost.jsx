@@ -10,20 +10,20 @@ const EntPost = ({post}) => {
 
       <div className="postInfo">
         <Link to={`/entrepreneurPost/${post._id}`} className="link">
-          <span className="postTitle">{post.startUpName}</span>
+          <span className="postTitle">StartUp Name: {post.startUpName}</span>
         </Link>
         <hr />
         <span className="postDate">
           {new Date(post.createdAt).toDateString()}
         </span>
       </div>
-      <p className="postDesc">{post.desc}</p>
-      <p className="postDesc">{post.locationRange}</p>
-      <p className="postDesc">{post.startUpType}</p>
-      <p className="postDesc">{post.productType}</p>
-      <p className="postDesc">{post.price}</p>
-      <p className="postDesc">{post.quantity}</p>
-      <p className="postDesc">{post.contact}</p>
+      <p className="postDesc">StartUp Type: {post.startUpType}</p>
+      <p className="postDesc">Product Type: {post.productType}</p>
+      <p className="postDesc">Price: {post.price}</p>
+      <p className="postDesc">Quantity: {post.quantity}</p>
+      <p className="postDesc">Location Range: {post.locationRange}</p>
+      <p className="postDesc">Description: {post.desc}</p>
+      <p className="postDesc">Contact: 0{post.contact}</p>
         </div>
         <br />
         </>

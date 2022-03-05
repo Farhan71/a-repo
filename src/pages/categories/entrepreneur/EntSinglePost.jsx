@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import {Context} from "../../../context/Context"
+import CommentBlock from '../../comment/CommentBlock';
 
 const EntSinglePost = () => {
     const loc = useLocation();
@@ -61,22 +62,25 @@ const EntSinglePost = () => {
     
   
     return (
-        <div>
+        <div style={{border: '1px solid red', height: '650px', width: '400px'}}>
         <div className="singlePostWrapper">
-   {post.photo && (
-     <img src={PF + post.photo} alt="" className="singlePostImg" />
-   )}
+        {post.photo ? 
+        (<img src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" className="singlePostImg" /> ):
+          <img src="https://image.shutterstock.com/image-vector/grunge-rubber-stamp-text-look-260nw-197453309.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
    {updateMode ? (
-     <input
+     <div>
+       <h1>StartUp Name: </h1>
+       <input
        type="text"
        value={startUpName}
        className="singlePostTitleInput"
        autoFocus
        onChange={(e) => setStartUpName(e.target.value)}
      />
+     </div>
    ) : (
      <h1 className="singlePostTitle">
-       {startUpName}
+       StartUp Name: {startUpName}
        {post.username === user?.username && (
          <div className="singlePostEdit">
            <i
@@ -93,71 +97,74 @@ const EntSinglePost = () => {
    )}
    <div className="singlePostInfo">
      <span className="singlePostAuthor">
-       Author:
+       Posted By:
        <Link to={`/${post.username}`} className="link">
          <b> {post.username}</b>
        </Link>
      </span>
+     <p> At: 
      <span className="singlePostDate">
        {new Date(post.createdAt).toDateString()}
      </span>
+     </p>
    </div>
    {updateMode ? (
        <div>
-           <textarea
-       className="singlePostDescInput"
-       value={desc}
-       onChange={(e) => setDesc(e.target.value)}
-     />
 
-           <textarea
-       className="singlePostDescInput"
-       value={locationRange}
-       onChange={(e) => setLocationRange(e.target.value)}
-     />
-
-           <textarea
-       className="singlePostDescInput"
-       value={price}
-       onChange={(e) => setPrice(e.target.value)}
-     />
-
-           <textarea
-       className="singlePostDescInput"
-       value={quantity}
-       onChange={(e) => setQuantity(e.target.value)}
-     />
-
-           <textarea
+<h6>StartUp Type: </h6>  <textarea
        className="singlePostDescInput"
        value={startUpType}
        onChange={(e) => setStartUpType(e.target.value)}
-     />
+     /> <br />
 
-        <textarea
+        <h6>Product Type: </h6> <textarea
        className="singlePostDescInput"
        value={productType}
        onChange={(e) => setProductType(e.target.value)}
-     />
+     /> <br />
 
-           <textarea
+         <h6>Price: </h6>  <textarea
+       className="singlePostDescInput"
+       value={price}
+       onChange={(e) => setPrice(e.target.value)}
+     /> <br />
+
+         <h6>Quantity: </h6>  <textarea
+       className="singlePostDescInput"
+       value={quantity}
+       onChange={(e) => setQuantity(e.target.value)}
+     /> <br />
+
+<h6>Location Range: </h6>   <textarea
+       className="singlePostDescInput"
+       value={locationRange}
+       onChange={(e) => setLocationRange(e.target.value)}
+     /> <br />
+
+<h6>Description: </h6> <textarea
+       className="singlePostDescInput"
+       value={desc}
+       onChange={(e) => setDesc(e.target.value)}
+     /> <br />
+
+        <h6>Contact: </h6>   <textarea
        className="singlePostDescInput"
        value={contact}
        onChange={(e) => setContact(e.target.value)}
-     />
+     /> <br />
        </div>
      
      
    ) : (
        <div>
-           <p>{startUpName}</p>
-          <p className="singlePostDesc">{desc}</p>
-          <p>{locationRange}</p>
-          <p>{price}</p>
-          <p>{quantity}</p>
-          <p>{contact}</p>
-          <p>{startUpType}</p>
-          <p>{productType}</p> 
+          <p>StartUp Type: {startUpType}</p>
+          <p>Product Type: {productType}</p> 
+          <p>Price: {price}</p>
+          <p>Quantity: {quantity}</p>  
+          <p>Location Range: {locationRange}</p>
+          <p className="singlePostDesc">Description: {desc}</p>
+          <p>Contact: 0{contact}</p>
+          <CommentBlock></CommentBlock> 
        </div>
      
    )}

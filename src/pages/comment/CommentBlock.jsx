@@ -18,9 +18,12 @@ const CommentBlock = () => {
         fetchComments();
     },[])
     return (
-        <div>
+        <div style={{border: '1px solid red', height: '800px', width: '400px', marginTop:"100px"}}>
             <CommentWrite postID={path} ></CommentWrite>
+            <div >
             <CommentAll comments={comments}></CommentAll>
+            </div>
+            
         </div>
     );
 };

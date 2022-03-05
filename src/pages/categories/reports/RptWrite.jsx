@@ -15,6 +15,7 @@ const RptWrite = () => {
     e.preventDefault();
     const newPost = {
       username: user.username,
+      userId:user._id,
       title,
       desc
     };
@@ -34,9 +35,9 @@ const RptWrite = () => {
     } catch (err) {}
   };
     return (
-        <div className="write container">
+        <div className="write container"> 
       {file && (
-        <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
+        <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
       )}
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">

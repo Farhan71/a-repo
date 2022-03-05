@@ -49,6 +49,7 @@ const AccSinglePost = () => {
     try {
       await axios.put(`/accommodations/${post._id}`, {
         username: user.username,
+        userId: user._id,
         location,
         desc, rent, member, contact, locationDetails
       });
@@ -57,22 +58,33 @@ const AccSinglePost = () => {
   };
 
     return (
-        <div>
+
+      // <div style={{border: '1px solid red', height: '550px', width: '400px'}}>
+      //        {post.photo ? <img className="postImg" src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" /> : <img src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
+
+
+        <div style={{border: '1px solid red', height: '550px', width: '400px'}}>
              <div className="singlePostWrapper">
-        {post.photo && (
-          <img src={PF + post.photo} alt="" className="singlePostImg" />
-        )}
+        {post.photo ? 
+        (<img src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" className="singlePostImg" /> ):
+          <img src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
+      
         {updateMode ? (
-          <input
+
+          <div>
+            <h1>Location: </h1>
+            <input
             type="text"
             value={location}
             className="singlePostTitleInput"
             autoFocus
             onChange={(e) => setLocation(e.target.value)}
           />
+          </div>
+         
         ) : (
           <h1 className="singlePostTitle">
-            {location}
+            Location: {location}
             {post.username === user?.username && (
               <div className="singlePostEdit">
                 <i
@@ -89,63 +101,62 @@ const AccSinglePost = () => {
         )}
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author:
+            Posted By:
             <Link to={`/${post.username}`} className="link">
               <b> {post.username}</b>
             </Link>
-          </span>
+          </span> 
+          <p> At: 
           <span className="singlePostDate">
             {new Date(post.createdAt).toDateString()}
           </span>
+          </p>
+          
         </div>
         {updateMode ? (
             <div>
-                <textarea
-            className="singlePostDescInput"
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
-          />
 
-                <textarea
-            className="singlePostDescInput"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
 
-                <textarea
+             <h6>Location Details: </h6>   <textarea
             className="singlePostDescInput"
             value={locationDetails}
             onChange={(e) => setLocationDetails(e.target.value)}
-          />
+          /> <br />
 
-                <textarea
+             <h6>Rent: </h6>   <textarea
             className="singlePostDescInput"
             value={rent}
             onChange={(e) => setRent(e.target.value)}
-          />
+          /> <br />
 
-                <textarea
+             <h6>Member: </h6>   <textarea
             className="singlePostDescInput"
             value={member}
             onChange={(e) => setMember(e.target.value)}
-          />
+          /> <br />
 
-                <textarea
+            <h6>Description: </h6> <textarea
+            className="singlePostDescInput"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+          /> <br />
+
+             <h6>Contact: </h6>   <textarea
             className="singlePostDescInput"
             value={contact}
             onChange={(e) => setContact(e.target.value)}
-          />
+          /> <br />
             </div>
           
           
         ) : (
             <div>
-               <p className="singlePostDesc">{desc}</p>
-               <p>{location}</p>
-               <p>{rent}</p>
-               <p>{member}</p>
-               <p>{contact}</p>
-               <p>{locationDetails}</p>
+              
+                <p>Location Details: {locationDetails}</p>
+                <p> Rent: {rent}</p>
+                <p> Member: {member}</p>
+               <p className="singlePostDesc"> Descriptions: {desc}</p>
+                <p>Contact: 0{contact}</p>
                <CommentBlock></CommentBlock>
             </div>
           

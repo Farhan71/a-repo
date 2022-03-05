@@ -16,7 +16,7 @@ const RptPost = ({ post }) => {
           {new Date(post.createdAt).toDateString()}
         </span>
       </div>
-      <p className="postDesc">{post.desc}</p>
+      <p className="postDesc">Description: {post.desc}</p>
         </div>
         <br />
         </>

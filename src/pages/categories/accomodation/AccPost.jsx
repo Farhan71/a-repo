@@ -14,18 +14,20 @@ const AccPost = ({ post }) => {
           ))}
         </div> */}
         <Link to={`/accommodationPost/${post._id}`} className="link">
-          <span className="postTitle">{post.location}</span>
+          <span className="postTitle">Location: {post.location}</span>
         </Link>
         <hr />
         <span className="postDate">
           {new Date(post.createdAt).toDateString()}
         </span>
       </div>
-      <p className="postDesc">{post.desc}</p>
-      <p className="postDesc">{post.locationDetails}</p>
-      <p className="postDesc">{post.rent}</p>
-      <p className="postDesc">{post.member}</p>
-      <p className="postDesc">{post.contact}</p>
+      <p className="postDesc">Location Details: {post.locationDetails}</p>
+      
+      
+      <p className="postDesc">Rent: {post.rent}</p>
+      <p className="postDesc">Member: {post.member}</p>
+      <p className="postDesc"> Descriptions: {post.desc}</p>
+      <p className="postDesc">Contact: 0{post.contact}</p>
         </div>
         <br />
         </>
