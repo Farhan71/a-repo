@@ -1,32 +1,81 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import {Context} from "../../../context/Context"
+import "./bldPost.css"
 
 const BldPost = ({post}) => {
+    const [auther, setAuther] = useState([]);
+    const [commentsNo, setCommentsNo] = useState([]);
     const PF = "http://localhost:5000/images/";
+
+    useEffect(() =>{
+      const getId = async () => {
+          const fetchUser = await axios.get(`users/${post.userId}`)
+          console.log(fetchUser.data)
+          setAuther(fetchUser.data)
+          // setId(res.data)
+      };
+      getId();
+  }, [post.userId])
+
+  useEffect(() =>{
+    const fetchCommentsNo = async () => {
+        const res = await axios.get(`/comment/${post._id}/count`);
+        setCommentsNo(res.data)
+    };
+    fetchCommentsNo();
+},[post._id])
+
     return (
-        <>
-        <div style={{border: '1px solid red', height: '550px', width: '400px'}}>
-             {post.photo ? <img className="postImg" src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" /> : <img src="https://previews.123rf.com/images/laracold/laracold1706/laracold170600015/80321483-creative-blood-motivation-information-donor-poster-blood-donation-world-blood-donor-day-banner-red-b.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
-      <div className="postInfo">
-        <Link to={`/bloodPost/${post._id}`} className="link">
-          <span className="postTitle">Group: {post.group}</span>
-        </Link>
-        <hr />
-        <span className="postDate">
-          {new Date(post.createdAt).toDateString()}
-        </span>
-      </div>
+        <div className="post-body">
+
+<Link to={`/bloodPost/${post._id}`} className="link">
+
+  <div className="card mb-3">
+    
+    
+    <div className="card-body">
+
+
+    <div className="settingsPP">
+                {auther.profilePic ? ( <img
+              src={PF+auther.profilePic}
+              alt=""
+            />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+           
+            </div>
+            
       
+        
+          
+          <h3 className="card-title">{post.username}</h3>
+          <h6 class="card-subtitle mb-2 text-muted"><span>{new Date(post.createdAt).toDateString()}</span></h6>
       
-      <p className="postDesc">Location: {post.location}</p>
-      <p className="postDesc">Time and Date: {post.time}</p>
-      <p className="postDesc">Bags: {post.bags}</p>
-      <p className="postDesc">Patient State: {post.patientState}</p>
-      <p className="postDesc">Description: {post.desc}</p>
-      <p className="postDesc">Contact: {post.contact}</p>
+        
+     
+      
+      <h3 className="card-title">Group: {post.group}</h3>
+      <p className="card-text">Time and Date: {post.time}</p>
+      <p className="card-text">Bags: {post.bags}</p>
+
+      <p className="card-text">Description: {post.desc}</p>
+    
+        
+
         </div>
-        <br />
-        </>
+      
+
+        {post.photo ? <img className="card-img-top" src={PF + post.photo} alt="" /> : <img src="https://previews.123rf.com/images/laracold/laracold1706/laracold170600015/80321483-creative-blood-motivation-information-donor-poster-blood-donation-world-blood-donor-day-banner-red-b.jpg" alt="" /> }
+        <p ><i class="fa-solid fa-comment">Comments</i></p> 
+        <p>{commentsNo}</p>
+
+        </div>
+
+        </Link>
+       
+        </div>
     );
 };
 

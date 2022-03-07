@@ -6,6 +6,11 @@ import { Link } from "react-router-dom";
 import {Context} from "../../context/Context"
 
 const CommentSingle = ({comment}) => {
+  const [auther, setAuther] = useState([]);
+  const [commentsNo, setCommentsNo] = useState([]);
+
+  const PF = "http://localhost:5000/images/";
+
     const loc = useLocation();
     const path = loc.pathname.split("/")[2];
     const [post, setPost] = useState({});
@@ -14,14 +19,26 @@ const CommentSingle = ({comment}) => {
     const [desc, setDesc] = useState("");
     const [updateMode, setUpdateMode] = useState(false);
 
+  //   useEffect(() =>{
+  //     const getId = async () => {
+  //         const fetchUser = await axios.get(`users/${comment.userId}`)
+  //         console.log(fetchUser.data)
+  //         setAuther(fetchUser.data)
+  
+  //     };
+  //     getId();
+  // }, [comment])
+
     useEffect(() => {
         const getPost = async () => {
           const res = await axios.get(`/comment/${comment._id}` );
+          const fetchUser = await axios.get(`/users/${comment.userId}`)
+          setAuther(fetchUser.data)
           setPost(res.data);
           setDesc(res.data.desc);
         };
         getPost();
-      }, [comment._id]);
+      }, [comment]);
 
       const handleDelete = async () => {
         try {
@@ -45,29 +62,30 @@ const CommentSingle = ({comment}) => {
 
 
     return (
-    //     <div>
-    //         <div>
-    //          <span className="postDate">
-    //       {new Date(comment.createdAt).toDateString()}
-    //     </span>
-    //   </div>
-    //   <p className="commentDesc">{comment.desc}</p>
-    //     </div>
+    <div className="card  mb-3">
+    <div className="card-body">
+    <div className="settingsPP">
+                      {auther.profilePic ? ( <img
+                    src={PF+auther.profilePic}
+                    alt=""
+                  />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+                 
+                  </div>
+    <h3 className="card-title">
+   <Link to={`/${comment.userId}`} className="link">
+     <b> {comment.username}</b>
+   </Link>
+ </h3>
+ <h6 class="card-subtitle mb-2 text-muted">
+ <span>
+   {new Date(comment.createdAt).toDateString()}
+ </span>
+ </h6>
 
-
-    <div style={{border: '1px solid blue', height: '150px', width: '350px', marginTop:"50px"}}>
-    <div className="singlePostWrapper">
 {updateMode ? (
-//  <input
-//    type="text"
-//    value={location}
-//    className="singlePostTitleInput"
-//    autoFocus
-//    onChange={(e) => setLocation(e.target.value)}
-//  />
-<h1>edit comment</h1>
+<h5 className="card-title">edit comment</h5>
 ) : (
- <h1 className="singlePostTitle">
+ <h5 className="card-text">
    {desc}
    {post.username === user?.username && (
      <div className="singlePostEdit">
@@ -81,40 +99,22 @@ const CommentSingle = ({comment}) => {
        ></i>
      </div>
    )}
- </h1>
+ </h5>
 )}
-<div className="singlePostInfo">
- <span className="singlePostAuthor">
-   Commented By:
-   <Link to={`/${comment.username}`} className="link">
-     <b> {comment.username}</b>
-   </Link>
- </span>
- <p>
-   At: <span className="singlePostDate">
-   {new Date(comment.createdAt).toDateString()}
- </span>
- </p>
-</div>
+
+ 
+
+
 {updateMode ? (
    <div>
        <textarea
-   className="singlePostDescInput"
+   className="form-control"
+
    value={desc}
    onChange={(e) => setDesc(e.target.value)}
- />
-
-       
+ />     
    </div>
- 
- 
-) : (
-  //  <div>
-  //     <p className="singlePostDesc">{desc}</p>
-  //  </div> 
-  ""
- 
-)}
+) : ("")}
 {updateMode && (
  <button className="singlePostButton" onClick={handleUpdate}>
    Update

@@ -30,9 +30,16 @@
 } */
 .navbar {
   background-color: #27395E;
+  margin-bottom: 0px;
+ 
 }
 .navbar-brand{
   height: 60px;
+}
+
+.nav-link {
+  color: white !important;
+  text-decoration: none;
 }
 
 .navbar-nav{

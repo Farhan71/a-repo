@@ -4,6 +4,7 @@ import axios from "axios";
 import BldPosts from './BldPosts';
 import BldWrite from './BldWrite';
 import { useLocation } from "react-router";
+import "./bldPage.css"
 
 const BldPage = () => {
     const [posts, setPosts] = useState([]);
@@ -33,7 +34,8 @@ const BldPage = () => {
     console.log (filterPosts)
 
     return (
-      <>
+      <div className="post-page container" > 
+
 
 <label for="Group">Choose Blood Group:</label>
                     <select onChange={(e) =>  {
@@ -53,17 +55,19 @@ const BldPage = () => {
                       <option value="O Negative">O-</option>
                     </select> 
         <div className="row">
-            <div className="col-6">
+            <div className="col-md-6">
               {
                 filter ? (<BldPosts posts={filterPosts}></BldPosts>) : (<BldPosts posts={posts}></BldPosts>)
               }
             
             </div>
-            <div className="col-6">
+            <div className="col-md-6">
+              <div className="write-portion">
             <BldWrite></BldWrite>
+            </div>
             </div>   
         </div>
-       </>
+       </div>
     );
 };
 

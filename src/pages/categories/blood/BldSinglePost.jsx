@@ -5,9 +5,14 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import {Context} from "../../../context/Context"
 import CommentBlock from '../../comment/CommentBlock';
+import "./bldSinglePost.css"
 
 const BldSinglePost = () => {
-    const loc = useLocation();
+
+    const [auther, setAuther] = useState([]);
+    const [commentsNo, setCommentsNo] = useState([]);
+
+    const loc = useLocation()
     const path = loc.pathname.split("/")[2];
     const [post, setPost] = useState({});
     const PF = "http://localhost:5000/images/";
@@ -27,6 +32,9 @@ const BldSinglePost = () => {
     useEffect(() => {
         const getPost = async () => {
           const res = await axios.get("/blood/" + path);
+          const fetchUser = await axios.get(`/users/${res.data.userId}`)
+          console.log(fetchUser.data)
+          setAuther(fetchUser.data)
           setPost(res.data);
           setLocation(res.data.location);
           setGroup (res.data.group);
@@ -38,6 +46,14 @@ const BldSinglePost = () => {
         };
         getPost();
       }, [path]);
+
+      useEffect(() =>{
+        const fetchCommentsNo = async () => {
+            const res = await axios.get(`/comment/${post._id}/count`);
+            setCommentsNo(res.data)
+        };
+        fetchCommentsNo();
+      },[post._id])
     
       const handleDelete = async () => {
         try {
@@ -59,92 +75,95 @@ const BldSinglePost = () => {
         } catch (err) {}
       };
     return (
-        <div style={{border: '1px solid red', width: '400px'}}>
-             <div className="singlePostWrapper">
-             {post.photo ? 
-        (<img src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" className="singlePostImg" /> ):
-          <img src="https://previews.123rf.com/images/laracold/laracold1706/laracold170600015/80321483-creative-blood-motivation-information-donor-poster-blood-donation-world-blood-donor-day-banner-red-b.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
+        <div className="container" style={{height:"1200px", backgroundColor:"#f4f4f4"}} >
+             <div className="row">
+
+               <div className="col-md-6" style={{marginTop:"100px"}}>
+
+              <div className="card mb-3">
+
+                <div className="card-body">
+
+                <div className="settingsPP">
+                      {auther.profilePic ? ( <img
+                    src={PF+auther.profilePic}
+                    alt=""
+                  />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+                 
+                  </div>
+
+                  <h3 className="card-title"> <Link to={`/${post.userId}`} className="link">{post.username} </Link> </h3>
+        <h6 class="card-subtitle mb-2 text-muted"><span>{new Date(post.createdAt).toDateString()}</span></h6>
+
+            
         {updateMode ? (
           <div>
-            <h1>Group: </h1>
+            <h3 className="card-title">Group: </h3>
           <input
             type="text"
             value={group}
-            className="singlePostTitleInput"
+            className="form-control"
             autoFocus
             onChange={(e) => setLocation(e.target.value)}
           />
           </div>
         ) : (
-          <h1 className="singlePostTitle">
+          <h3 className="card-title">
             Group: {group}
             {post.username === user?.username && (
-              <div className="singlePostEdit">
+              <div >
                 <i
-                  className="singlePostIcon far fa-edit"
+                  className="far fa-edit"
                   onClick={() => setUpdateMode(true)}
                 ></i>
                 <i
-                  className="singlePostIcon far fa-trash-alt"
+                  className="far fa-trash-alt"
                   onClick={handleDelete}
                 ></i>
               </div>
             )}
-          </h1>
+          </h3>
         )}
-        <div className="singlePostInfo">
-          <span className="singlePostAuthor">
-            Posted By:
-            <Link to={`/${post.username}`} className="link">
-              <b>  {post.username}</b>
-            </Link>
-          </span> 
-          <p> At: 
-          <span className="singlePostDate">
-            {new Date(post.createdAt).toDateString()}
-          </span>
-          </p>
-         
-        </div>
+        
         {updateMode ? (
             <div> 
               
-              <h6>Location: </h6> <textarea
-            className="singlePostDescInput"
+              <h6 className="card-text">Location: </h6> <textarea
+           className="form-control"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           /> <br />
 
-            <h6>Date and Time: </h6> <textarea
-            className="singlePostDescInput"
+            <h6 className="card-text">Date and Time: </h6> <textarea
+            className="form-control"
             value={time}
             onChange={(e) => setTime(e.target.value)}
           /> <br />
 
-          <h6>Bags: </h6>  <textarea
-            className="singlePostDescInput"
+          <h6 className="card-text">Bags: </h6>  <textarea
+            className="form-control"
             value={bags}
             onChange={(e) => setBags(e.target.value)}
           /> <br />
               
               
-              <h6>Patient State: </h6>  <textarea
-            className="singlePostDescInput"
+              <h6 className="card-text">Patient State: </h6>  <textarea
+            className="form-control"
             value={patientState}
             onChange={(e) => setPatientState(e.target.value)}
           /> <br />
 
-            <h6>Descriptions</h6>
+            <h6 className="card-text">Descriptions</h6>
                 <textarea
-            className="singlePostDescInput"
+            className="form-control"
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
           /> <br />
 
                 
 
-              <h6>Contact: </h6>  <textarea
-            className="singlePostDescInput"
+             <h6 className="card-text">Contact: </h6>  <textarea
+            className="form-control"
             value={contact}
             onChange={(e) => setContact(e.target.value)}
           />
@@ -154,13 +173,13 @@ const BldSinglePost = () => {
         ) : (
             <div>
                
-               <p> Location: {location}</p>
-               <p> Date and Time: {time}</p>
-               <p> Bags: {bags}</p>
-               <p> Patient State: {patientState}</p>
-               <p className="singlePostDesc"> Descriptions: {desc}</p>
-               <p> Contact: {contact}</p>
-               <CommentBlock></CommentBlock>
+               <p className="card-text"> Location: {location}</p>
+               <p className="card-text"> Date and Time: {time}</p>
+               <p className="card-text"> Bags: {bags}</p>
+               <p className="card-text"> Patient State: {patientState}</p>
+               <p className="card-text"> Descriptions: {desc}</p>
+               <p className="card-text"> Contact: {contact}</p>
+               
             </div>
           
         )}
@@ -169,6 +188,21 @@ const BldSinglePost = () => {
             Update
           </button>
         )}
+</div>
+
+{post.photo ? 
+        (<img src={PF + post.photo} alt="" className="card-img-top" /> ):
+          <img src="https://previews.123rf.com/images/laracold/laracold1706/laracold170600015/80321483-creative-blood-motivation-information-donor-poster-blood-donation-world-blood-donor-day-banner-red-b.jpg"  alt="" /> }
+          <p ><i class="fa-solid fa-comment">Comments</i></p> 
+        <p>{commentsNo}</p>
+
+</div>
+</div>
+
+        <div className="col-md-6">
+              <CommentBlock></CommentBlock> 
+        </div>
+
       </div>
         </div>
     );

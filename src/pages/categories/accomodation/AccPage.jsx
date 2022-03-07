@@ -1,6 +1,7 @@
 import React from 'react';
 import AccPosts from "./AccPosts"
 import AccWrite from "./AccWrite"
+import "./accPage.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router";
@@ -14,9 +15,7 @@ const AccPage = () => {
     const [filterPosts, setFilterPosts] = useState([]);
     
     useLocation().search = filter
-    // console.log(useLocation())
-      // console.log(location)
-    // search = filter; 
+ 
 
     useEffect(() => {
       const fetchPosts = async () => {
@@ -48,15 +47,13 @@ const AccPage = () => {
 
     
     return (
-      <> 
+      <div className="post-page container" > 
 
             <label for="Location">Choose a location:</label>
                     <select onChange={(e) =>  {
                       filter="";
                       setFilter(e.target.value)    
-
-                    }
-                    
+                    }                   
                     } name="Location" id="Location">
                       <option value="Sonapur">Sonapur</option>
                       <option value="Dotter Hat">Dotter Hat</option>
@@ -76,7 +73,7 @@ const AccPage = () => {
       
 
             <div className="row">
-                    <div className="col-6">
+                    <div className="col-md-6">
 
                       {
                         filter ? (<AccPosts posts={filterPosts}></AccPosts>) : (<AccPosts posts={posts}></AccPosts>)
@@ -85,12 +82,15 @@ const AccPage = () => {
 {/* <AccPosts posts={posts}></AccPosts> */}
                     
                     </div>
-                    <div className="col-6">
-                    <AccWrite></AccWrite>
+                    <div className="col-md-6"  >
+                      <div className="write-portion">
+                      <AccWrite></AccWrite>
+                      </div>
+                    
             </div>
    
         </div>
-      </>
+      </div>
         
     );
 };

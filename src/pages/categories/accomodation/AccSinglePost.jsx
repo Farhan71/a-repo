@@ -5,8 +5,13 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import {Context} from "../../../context/Context"
 import CommentBlock from '../../comment/CommentBlock';
+import "./accSinglePost.css"
 
 const AccSinglePost = () => {
+  const [auther, setAuther] = useState([]);
+  const [commentsNo, setCommentsNo] = useState([]);
+
+
   const loc = useLocation();
   const path = loc.pathname.split("/")[2];
   const [post, setPost] = useState({});
@@ -25,6 +30,9 @@ const AccSinglePost = () => {
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get("/accommodations/" + path);
+      const fetchUser = await axios.get(`/users/${res.data.userId}`)
+      console.log(fetchUser.data)
+      setAuther(fetchUser.data)
       setPost(res.data);
       setLocation(res.data.location);
       setRent (res.data.rent);
@@ -35,6 +43,18 @@ const AccSinglePost = () => {
     };
     getPost();
   }, [path]);
+
+
+useEffect(() =>{
+  const fetchCommentsNo = async () => {
+      const res = await axios.get(`/comment/${post._id}/count`);
+      setCommentsNo(res.data)
+  };
+  fetchCommentsNo();
+},[post._id])
+
+
+
 
   const handleDelete = async () => {
     try {
@@ -58,32 +78,40 @@ const AccSinglePost = () => {
   };
 
     return (
+<div className="container" style={{height:"1200px", backgroundColor:"#f4f4f4"}}>
+  
+        <div className="row" >
+          <div className="col-md-6" style={{marginTop:"100px"}} >
+             <div className="card mb-3">
 
-      // <div style={{border: '1px solid red', height: '550px', width: '400px'}}>
-      //        {post.photo ? <img className="postImg" src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" /> : <img src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
+               <div className="card-body">
 
-
-        <div style={{border: '1px solid red', height: '550px', width: '400px'}}>
-             <div className="singlePostWrapper">
-        {post.photo ? 
-        (<img src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" className="singlePostImg" /> ):
-          <img src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" style={{height: '200px', width: '200px'}} alt="" /> }
+               <div className="settingsPP">
+                      {auther.profilePic ? ( <img
+                    src={PF+auther.profilePic}
+                    alt=""
+                  />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+                 
+                  </div>
+        
+        <h3 className="card-title"> <Link to={`/${post.userId}`} className="link">{post.username} </Link> </h3>
+        <h6 class="card-subtitle mb-2 text-muted"><span>{new Date(post.createdAt).toDateString()}</span></h6>
       
         {updateMode ? (
 
           <div>
-            <h1>Location: </h1>
+            <h3 className="card-title">Location: </h3>
             <input
             type="text"
             value={location}
-            className="singlePostTitleInput"
+            className="form-control"
             autoFocus
             onChange={(e) => setLocation(e.target.value)}
           />
           </div>
          
         ) : (
-          <h1 className="singlePostTitle">
+          <h3 className="card-title">
             Location: {location}
             {post.username === user?.username && (
               <div className="singlePostEdit">
@@ -97,52 +125,40 @@ const AccSinglePost = () => {
                 ></i>
               </div>
             )}
-          </h1>
+          </h3>
         )}
-        <div className="singlePostInfo">
-          <span className="singlePostAuthor">
-            Posted By:
-            <Link to={`/${post.username}`} className="link">
-              <b> {post.username}</b>
-            </Link>
-          </span> 
-          <p> At: 
-          <span className="singlePostDate">
-            {new Date(post.createdAt).toDateString()}
-          </span>
-          </p>
-          
-        </div>
+      
         {updateMode ? (
             <div>
 
 
-             <h6>Location Details: </h6>   <textarea
-            className="singlePostDescInput"
+             <h6 className="card-text">Location Details: </h6>  
+            <textarea
+            className="form-control"
             value={locationDetails}
             onChange={(e) => setLocationDetails(e.target.value)}
           /> <br />
 
-             <h6>Rent: </h6>   <textarea
-            className="singlePostDescInput"
+             <h6 className="card-text">Rent: </h6>   <textarea
+            className="form-control"
             value={rent}
             onChange={(e) => setRent(e.target.value)}
           /> <br />
 
-             <h6>Member: </h6>   <textarea
-            className="singlePostDescInput"
+             <h6 className="card-text">Member: </h6>   <textarea
+            className="form-control"
             value={member}
             onChange={(e) => setMember(e.target.value)}
           /> <br />
 
-            <h6>Description: </h6> <textarea
-            className="singlePostDescInput"
+            <h6 className="card-text">Description: </h6> <textarea
+            className="form-control"
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
           /> <br />
 
-             <h6>Contact: </h6>   <textarea
-            className="singlePostDescInput"
+             <h6 className="card-text">Contact: </h6>   <textarea
+            className="form-control"
             value={contact}
             onChange={(e) => setContact(e.target.value)}
           /> <br />
@@ -152,12 +168,12 @@ const AccSinglePost = () => {
         ) : (
             <div>
               
-                <p>Location Details: {locationDetails}</p>
-                <p> Rent: {rent}</p>
-                <p> Member: {member}</p>
-               <p className="singlePostDesc"> Descriptions: {desc}</p>
-                <p>Contact: 0{contact}</p>
-               <CommentBlock></CommentBlock>
+                <p className="card-text">Location Details: {locationDetails}</p>
+                <p className="card-text"> Rent: {rent}</p>
+                <p className="card-text"> Member: {member}</p>
+               <p className="card-text"> Descriptions: {desc}</p>
+                <p className="card-text">Contact: 0{contact}</p>
+               
             </div>
           
         )}
@@ -167,6 +183,22 @@ const AccSinglePost = () => {
           </button>
         )}
       </div>
+  
+
+      {post.photo ? <img  className="card-img-top" src={PF + post.photo}  alt="" /> : <img src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" alt="" /> }
+        <p ><i class="fa-solid fa-comment">Comments</i></p> 
+        <p>{commentsNo}</p>
+
+
+      </div>
+        </div>
+
+        
+        <div className="col-md-6">
+              <CommentBlock></CommentBlock> 
+        </div>
+
+        </div>
         </div>
     );
 };

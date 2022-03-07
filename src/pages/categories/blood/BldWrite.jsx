@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext, useState } from "react";
 import axios from "axios";
 import {Context } from '../../../context/Context';
+import "./bldWrite.css"
 
 const BldWrite = () => {
     const [location, setLocation] = useState("");
@@ -39,33 +40,14 @@ const BldWrite = () => {
         } catch (err) {}
       };
     return (
-        <div className="write container">
-        {file && (
-          <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
-        )}
-        <form className="writeForm" onSubmit={handleSubmit}>
-          <div className="writeFormGroup">
-            <label htmlFor="fileInput">
-              <i className="writeIcon fas fa-plus"></i>
-            </label>
-            <input
-              type="file"
-              id="fileInput"
-              style={{ display: "none" }}
-              onChange={(e) => setFile(e.target.files[0])}
-            />
-            {/* <input
-               placeholder="Tell group"
-               type="text"
-              className="writeInput"
-              autoFocus={true}
-              onChange={e=>setGroup(e.target.value)}
-            /> */}
-          </div>
-          {/* <div className="writeFormGroup"> */}
+        <div className="write">
 
 
-          <label for="Group">Blood Group:</label>
+        <div className="write-body">
+        <span className="write-title">Create a post</span> <br />
+        <form  onSubmit={handleSubmit}>
+
+        <label for="Group">Blood Group:</label>
                     <select onChange={(e) =>  {setGroup(e.target.value)    
 
                     }
@@ -79,29 +61,37 @@ const BldWrite = () => {
                       <option value="AB Negative">AB-</option>
                       <option value="O Positive">O+</option>
                       <option value="O Negative">O-</option>
-                    </select> 
+                    </select>  <br /> <br />
 
 
-          <input
-             
+
+          <input  
               type="text"
+              className="form-control"
               placeholder="Location"
               onChange={e=>setLocation(e.target.value)}
-            ></input>
+            ></input> <br />
+
             <input
               placeholder="Tell time"
+              className="form-control"
               type="text"
               // className="writeInput writeText"
               onChange={e=>setTime(e.target.value)}
             ></input> <br />
+
             <input
               placeholder="Tell Bags"
+              className="form-control"
               type="text"
               // className="writeInput writeText"
               onChange={e=>setBags(e.target.value)}
-            ></input>
+            ></input> <br />
+
+
             <textarea
               placeholder="Tell patient State"
+              className="form-control"
               type="text"
               // className="writeInput writeText"
               onChange={e=>setPatientState(e.target.value)}
@@ -109,26 +99,48 @@ const BldWrite = () => {
             
             
           
-            <textarea
+            
+              <input
+              placeholder="Tell contact"
+              className="form-control"
+              type="text"
+              // className="writeInput writeText"
+              onChange={e=>setContact(e.target.value)}
+            ></input> <br />
+
+
+        {file && (
+          <img className="writeImg" style={{height: '100px', width: '100px'}} src={URL.createObjectURL(file)} alt="" />
+        )}
+        
+        
+            <label className="btn btn-primary" htmlFor="fileInput">
+              Add Photo
+            </label> <br />
+            <input
+              type="file"
+              id="fileInput"
+              style={{ display: "none" }}
+              onChange={(e) => setFile(e.target.files[0])}
+              className="form-control"
+            /> <br />
+
+
+<textarea
               placeholder="Tell description"
+              className="form-control"
               type="text"
               // className="writeInput writeText"
               onChange={e=>setDesc(e.target.value)}
             ></textarea> <br />
 
-              <input
-              placeholder="Tell contact"
-              type="text"
-              // className="writeInput writeText"
-              onChange={e=>setContact(e.target.value)}
-            ></input> <br />
-          {/* </div> */}
-          {/* <button className="writeSubmit" type="submit"> */}
-  
+        
           <button  type="submit">
             Publish
           </button>
         </form>
+        </div>
+
       </div>
     );
 };

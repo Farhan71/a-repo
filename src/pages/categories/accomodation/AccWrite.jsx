@@ -39,21 +39,80 @@ const AccWrite = () => {
     } catch (err) {}
   };
     return (
-        <div className="write container">
+        <div className="write">
+
+        <div className="write-body">
+        <span className="write-title">Create a post</span> <br />
+        <form onSubmit={handleSubmit}>
+
+        <label for="Location">Choose a location:</label>
+        
+          <select onChange={e=>setLocation(e.target.value)} name="Location" id="Location">
+            <option value="Sonapur">Sonapur</option>
+            <option value="Dotter Hat">Dotter Hat</option>
+            <option value="Roshid Colony">Roshid Colony</option>
+            <option value="Fokirpur">Fokirpur</option>
+            <option value="Garage">Garage</option>
+            <option value="Pouro Bajar">Pouro Bajar</option>
+            <option value="Boro Mosjid">Boro Mosjid</option>
+            <option value="Town Hall">Town Hall</option>
+            <option value="Housing">Housing</option>
+            <option value="Hospital Road">Hospital Road</option>
+            <option value="Bus Stand">Bus Stand</option>
+            <option value="Maijdee Bajar">Maijdee Bajar</option>
+          </select> <br /> <br />
+          <textarea
+            placeholder="Tell location details"
+            type="text"
+            // className="writeInput writeText"
+            onChange={e=>setLocationDetails(e.target.value)}
+            className="form-control"
+          ></textarea>  <br />
+
+        <input
+            placeholder="Tell rent"
+            type="text"
+            onChange={e=>setRent(e.target.value)}
+            className="form-control"
+          ></input> <br />
+
+          <input
+            placeholder="Tell member"
+            type="text"
+            // className="writeInput writeText"
+            onChange={e=>setMember(e.target.value)}
+            className="form-control"
+          ></input> <br />
+
+
+
+            <input
+            placeholder="Tell contact"
+            type="text"
+            // className="writeInput writeText"
+            onChange={e=>setContact(e.target.value)}
+            className="form-control"
+          ></input> <br />
+
+
+
+
       {file && (
-        <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
+        <img className="writeImg" style={{height: '100px', width: '100px', marginTop: '25px'}} src={URL.createObjectURL(file)} alt="" />
       )}
-      <form className="writeForm" onSubmit={handleSubmit}>
-        <div className="writeFormGroup">
-          <label htmlFor="fileInput">
-            <i className="writeIcon fas fa-plus"></i>
-          </label>
+     
+        
+          {/* <span>Picture: </span> */}
+          <label className="btn btn-primary" htmlFor="fileInput">
+            Add Photo
+          </label> <br />
           <input
             type="file"
             id="fileInput"
             style={{ display: "none" }}
             onChange={(e) => setFile(e.target.files[0])}
-          />
+            className="form-control"
+          /> <br />
           {/* <input
             type="text"
             placeholder="Location"
@@ -61,46 +120,16 @@ const AccWrite = () => {
             autoFocus={true}
             onChange={e=>setLocation(e.target.value)}
           /> */}
-        </div>
+        
 
 
-        <label for="Location">Choose a location:</label>
-  <select onChange={e=>setLocation(e.target.value)} name="Location" id="Location">
-    <option value="Sonapur">Sonapur</option>
-    <option value="Dotter Hat">Dotter Hat</option>
-    <option value="Roshid Colony">Roshid Colony</option>
-    <option value="Fokirpur">Fokirpur</option>
-    <option value="Garage">Garage</option>
-    <option value="Pouro Bajar">Pouro Bajar</option>
-    <option value="Boro Mosjid">Boro Mosjid</option>
-    <option value="Town Hall">Town Hall</option>
-    <option value="Housing">Housing</option>
-    <option value="Hospital Road">Hospital Road</option>
-    <option value="Bus Stand">Bus Stand</option>
-    <option value="Maijdee Bajar">Maijdee Bajar</option>
-  </select> 
+       
         
       
  
 
         {/* <div className="writeFormGroup"> */}
-        <textarea
-            placeholder="Tell location details"
-            type="text"
-            // className="writeInput writeText"
-            onChange={e=>setLocationDetails(e.target.value)}
-          ></textarea>  <br />
-        <input
-            placeholder="Tell rent"
-            type="text"
-            onChange={e=>setRent(e.target.value)}
-          ></input>
-          <input
-            placeholder="Tell member"
-            type="text"
-            // className="writeInput writeText"
-            onChange={e=>setMember(e.target.value)}
-          ></input>
+        
          
         
           <textarea
@@ -108,14 +137,10 @@ const AccWrite = () => {
             type="text"
             // className="writeInput writeText"
             onChange={e=>setDesc(e.target.value)}
+            className="form-control"
           ></textarea> <br />
 
-            <input
-            placeholder="Tell contact"
-            type="text"
-            // className="writeInput writeText"
-            onChange={e=>setContact(e.target.value)}
-          ></input> <br />
+            
         {/* </div> */}
         {/* <button className="writeSubmit" type="submit"> */}
 
@@ -123,6 +148,7 @@ const AccWrite = () => {
           Publish
         </button>
       </form>
+      </div>
     </div>
     );
 };

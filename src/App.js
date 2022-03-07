@@ -79,7 +79,7 @@ function App() {
         <Route path="/reportsPost/:postId">
           <RptSinglePost></RptSinglePost>
         </Route>
-        <Route path="/:username">
+        <Route path="/:userId">
           <Profile></Profile>
         </Route>
 

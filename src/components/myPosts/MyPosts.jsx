@@ -12,7 +12,7 @@ import EntPosts from '../../pages/categories/entrepreneur/EntPosts'
 
 const MyPosts = () => {
     const { user } = useContext(Context); 
-    let [filter, setFilter] = useState(["accommodations"]);
+    let [filter, setFilter] = useState("accommodations");
     const [filterPosts, setFilterPosts] = useState([]);
     useEffect(() => {
         const fetchFilterPosts = async () => {

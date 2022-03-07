@@ -6,26 +6,45 @@ import { useEffect, useState } from "react";
 const Profile = () => {
     const loc = useLocation();
     const [user, setUser] = useState([]);
-    const username = loc.pathname.split("/")[1];
-    console.log(username);
+    const userId = loc.pathname.split("/")[1];
+    const PF = "http://localhost:5000/images/";
+    console.log(userId);
     useEffect(() =>{
         const getId = async () => {
-            const fetchUser = await axios.get(`users/?user=${username}`)
-            console.log(fetchUser.data[0])
-            setUser(fetchUser.data[0])
+            const fetchUser = await axios.get(`users/${userId}`)
+            console.log(fetchUser.data)
+            setUser(fetchUser.data)
             // setId(res.data)
         };
         getId();
-    }, [username])
+    }, [userId])
     
     // console.log(id[1]);
     return (
-        <div>
-            <h1>Username: {user.username}</h1>
-            <h1>Email: {user.email}</h1>
-            <h1>Contact Number: {user.contact}</h1>
-            <h1>Student ID: {user.studentId}</h1>
-            <h1>Blood Group: {user.bloodGroup}</h1>
+        <div className="d-flex align-items-center justify-content-center p-5" style={{backgroundColor:"#f4f4f4", padding:"0px"}}>
+
+            <div className="card">
+
+            <div className="card-body">
+            <h6 className="d-flex align-items-center justify-content-center"> <div className="settingsPP">
+                {user.profilePic ? ( <img
+              src={PF+user.profilePic}
+              alt=""
+            />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)} 
+           
+            </div>
+            </h6>
+            <h3 className="card-title text-center">Username: {user.username}</h3> <br /> <br />
+            <h5 className="card-text">Email: {user.email}</h5>
+            <h5 className="card-text">Contact Number: {user.contact}</h5>
+            <h5 className="card-text">Student ID: {user.studentId}</h5>
+            <h5 className="card-text">Blood Group: {user.bloodGroup}</h5>
+
+            </div>
+
+            </div>
+
+
         </div>
     );
 };

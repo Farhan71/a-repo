@@ -59,13 +59,18 @@ export default function Settings() {
     }
   };
   return (
-    <div className="settings container">
+    <div className="container" style={{backgroundColor:"#f4f4f4"}}>
+    <div className="row ">
+      <div className="col-md-6">
+      
+    
+    <div className="settings">
       <div className="settingsWrapper">
         <div className="settingsTitle">
           <span className="settingsUpdateTitle">Update Your Account</span>
           {/* <span className="settingsDeleteTitle" onClick={handleDelete}>Delete Account</span> */}
         </div>
-        <form className="settingsForm" onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit}>
           <label>Profile Picture</label>
           <div className="settingsPP">
             <img
@@ -86,6 +91,7 @@ export default function Settings() {
           <input
             type="text"
             placeholder={user.username}
+            className="form-control"
             onChange={(e) => setUsername(e.target.value)}
           />
 
@@ -93,6 +99,7 @@ export default function Settings() {
           <label>Contact</label>
           <input
             type="text"
+            className="form-control"
             placeholder={user.contact}
             onChange={(e) => setContact(e.target.value)}
           />
@@ -100,6 +107,7 @@ export default function Settings() {
           <label>BloodGroup</label>
           <input
             type="text"
+            className="form-control"
             placeholder={user.bloodGroup}
             onChange={(e) => setBloodGroup(e.target.value)}
           />
@@ -107,6 +115,7 @@ export default function Settings() {
           <label>Donor</label>
           <input
             type="text"
+            className="form-control"
             placeholder={user.isDonor}
             onChange={(e) => setIsDonor(e.target.value)}
           />
@@ -115,6 +124,7 @@ export default function Settings() {
           <input
             type="text"
             placeholder={user.isEntrepreneur}
+            className="form-control"
             onChange={(e) => setIsEntrepreneur(e.target.value)}
           />
 
@@ -122,6 +132,7 @@ export default function Settings() {
           <input
             type="text"
             placeholder={user.isReporter}
+            className="form-control"
             onChange={(e) => setIsReporter(e.target.value)}
           />
 
@@ -130,6 +141,7 @@ export default function Settings() {
           <label>Password</label>
           <input
             type="password"
+            className="form-control"
             onChange={(e) => setPassword(e.target.value)}
           />
           
@@ -146,7 +158,18 @@ export default function Settings() {
         </form>
       </div>
       {/* <Sidebar /> */}
-      <MyPosts></MyPosts>
+      
+
+      </div>
     </div>
+
+
+    <div className="col-md-6">
+    <MyPosts></MyPosts>
+    </div>
+
+    </div>
+    </div>
+
   );
 }

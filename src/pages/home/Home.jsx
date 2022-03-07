@@ -75,51 +75,20 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <div>
-
-
+      <div className="home">
       <label for="Category">Choose a Category:</label>
                     <select onChange={(e) =>  {
                       filter="";
                       setFilter(e.target.value)    
-                    }
-                    
+                    }               
                     } name="Category" id="Category">
                       <option value="accommodations">Accommodations</option>
                       <option value="blood"> Blood Finding</option>  
                       <option value="entrepreneur">Entrepreneur</option>
                       <option value="otherThings">Accesories</option>
                       <option value="reports">Reports</option>
-                      <option value="books">Books</option>
-                     
-                    </select> 
- 
-        {/* <ul class="main-nav main-nav__level1">
-              <li class="main-nav__level1-item"><a href="#" className="main-nav__level1-link">Sort by</a>
-                  <ul class="main-nav__level2">
-                      <li class="main-nav__level2-item main-nav__sub-item"><a href="#" onChange={(e) =>  {setFilter(e.target.value)}} className="main-nav__level2-link">Accommodation</a></li>
-                      <li class="main-nav__level2-item main-nav__sub-item"><a href="#" className="main-nav__level2-link">Bloods</a></li>
-                      <li class="main-nav__level2-item main-nav__sub-item"><a href="#" className="main-nav__level2-link">Recycle Bin</a>
-                          <ul class="main-nav__level3">
-                              <li class="main-nav__level3-item main-nav__sub-item"><a href="#" className="main-nav__level3-link">Books</a></li>
-                              <li class="main-nav__level3-item main-nav__sub-item"><a href="#" className="main-nav__level3-link">Accessories</a></li>
-                          </ul>
-                      </li>
-                      <li class="main-nav__level2-item main-nav__sub-item"><a href="#" className="main-nav__level2-link">Entrepreneurs</a></li>
-                      <li class="main-nav__level2-item main-nav__sub-item"><a href="#" className="main-nav__level2-link">Reports</a></li>
-                  </ul>
-              </li>
-          </ul> */}
-
-        {/* <Posts posts={posts} /> */}
-        {/* {posts.map(post =>( <>
-          <p>{post.location}</p> &nbsp;
-        </>
-         
-        ))} */}
-        
-        
-
+                      <option value="books">Books</option>                    
+                    </select>      
         { filter ? (
           {
             'accommodations' : <AccPosts posts={filterPosts}></AccPosts>,
@@ -129,8 +98,7 @@ export default function Home() {
             'reports' : <RptPosts posts={filterPosts}>,</RptPosts>,
             'books' : <BookPosts posts={filterPosts}></BookPosts>
           }[filter] ) : <AccPosts posts={posts} ></AccPosts>
-        }
-        {/* <Sidebar /> */}
+        }      
       </div>
     </div>
   );

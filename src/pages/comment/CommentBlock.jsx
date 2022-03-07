@@ -18,10 +18,15 @@ const CommentBlock = () => {
         fetchComments();
     },[])
     return (
-        <div style={{border: '1px solid red', height: '800px', width: '400px', marginTop:"100px"}}>
-            <CommentWrite postID={path} ></CommentWrite>
+        <div className="card" style={{marginTop: "100px"}}>
+            <div className="card-body">
+                <div className="card-title"> Write a comment: </div>
+                
+            <CommentWrite postID={path} ></CommentWrite> <br />
             <div >
             <CommentAll comments={comments}></CommentAll>
+            </div>
+
             </div>
             
         </div>

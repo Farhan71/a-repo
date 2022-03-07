@@ -1,153 +1,64 @@
 import "./header.css";
-import header from "../../images/header.jpg"
+import { useEffect, useState } from "react";
+import header1 from "../../images/header.jpg"
+import {Carousel } from 'react-bootstrap';
+import header2 from "../../images/header1.jpg"
+import header3 from "../../images/login.jpg"
 
 export default function Header() {
+  
+
+
   return (
-    <div className="header container">
-      <div className="headerTitles">
+    // <div className="header container">
+    //   <div className="headerTitles">
 
-      {/* <!--Carousel Wrapper--> */}
-  <div id="carousel-example-1z" className="carousel slide carousel-fade" data-ride="carousel">
 
-    {/* <!--Indicators--> */}
-    <ol className="carousel-indicators">
-      <li data-target="#carousel-example-1z" data-slide-to="0" className="active"></li>
-      <li data-target="#carousel-example-1z" data-slide-to="1"></li>
-      <li data-target="#carousel-example-1z" data-slide-to="2"></li>
-    </ol>
-    {/* <!--/.Indicators--> */}
+    //   </div>
+     
+    // </div>
 
-    {/* <!--Slides--> */}
-    <div className="carousel-inner" role="listbox">
-
-      {/* <!--First slide--> */}
-      <div className="carousel-item active">
-        <div className="view" style={{backgroundImage: "url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg')", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
-
-          {/* <!-- Mask & flexbox options--> */}
-          <div className="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            {/* <!-- Content --> */}
-            <div className="text-center white-text mx-5 wow fadeIn">
-              <h1 className="mb-4">
-                <strong>Learn Bootstrap 4 with MDB</strong>
-              </h1>
-
-              <p>
-                <strong>Best & free guide of responsive web design</strong>
-              </p>
-
-              <p className="mb-4 d-none d-md-block">
-                <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and written versions
-                  available. Create your own, stunning website.</strong>
-              </p>
-
-              <a target="_blank" href="https://mdbootstrap.com/bootstrap-tutorial/" className="btn btn-outline-white btn-lg">Start free tutorial
-                <i className="fa fa-graduation-cap ml-2"></i>
-              </a>
-            </div>
-            {/* <!-- Content --> */}
-
-          </div>
-          {/* <!-- Mask & flexbox options--> */}
-
-        </div>
-      </div>
-      {/* <!--/First slide--> */}
-
-      {/* <!--Second slide--> */}
-      <div className="carousel-item">
-        <div className="view" style={{backgroundImage: "url('https://mdbootstrap.com/img/Photos/Others/images/47.jpg')", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
-
-          {/* <!-- Mask & flexbox options--> */}
-          <div className="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            {/* <!-- Content --> */}
-            <div className="text-center white-text mx-5 wow fadeIn">
-              <h1 className="mb-4">
-                <strong>Learn Bootstrap 4 with MDB</strong>
-              </h1>
-
-              <p>
-                <strong>Best & free guide of responsive web design</strong>
-              </p>
-
-              <p className="mb-4 d-none d-md-block">
-                <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and written versions
-                  available. Create your own, stunning website.</strong>
-              </p>
-
-              <a target="_blank" href="https://mdbootstrap.com/bootstrap-tutorial/" className="btn btn-outline-white btn-lg">Start free tutorial
-                <i className="fa fa-graduation-cap ml-2"></i>
-              </a>
-            </div>
-            {/* <!-- Content --> */}
-
-          </div>
-          {/* <!-- Mask & flexbox options--> */}
-
-        </div>
-      </div>
-      {/* <!--/Second slide--> */}
-
-      {/* <!--Third slide--> */}
-      <div className="carousel-item">
-        <div className="view" style={{backgroundImage: "url('https://mdbootstrap.com/img/Photos/Others/images/79.jpg')", backgroundRepeat: "no-repeat",  backgroundSize: "cover"}}>
-{/* 
-          <!-- Mask & flexbox options--> */}
-          <div className="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            {/* <!-- Content --> */}
-            <div className="text-center white-text mx-5 wow fadeIn">
-              <h1 className="mb-4">
-                <strong>Learn Bootstrap 4 with MDB</strong>
-              </h1>
-
-              <p>
-                <strong>Best & free guide of responsive web design</strong>
-              </p>
-
-              <p className="mb-4 d-none d-md-block">
-                <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and written versions
-                  available. Create your own, stunning website.</strong>
-              </p>
-
-              <a target="_blank" href="https://mdbootstrap.com/bootstrap-tutorial/" className="btn btn-outline-white btn-lg">Start free tutorial
-                <i className="fa fa-graduation-cap ml-2"></i>
-              </a>
-            </div>
-            {/* <!-- Content --> */}
-
-          </div>
-          {/* <!-- Mask & flexbox options--> */}
-
-        </div>
-      </div>
-      {/* <!--/Third slide--> */}
-
-    </div>
-    {/* <!--/.Slides--> */}
-
-    {/* <!--Controls--> */}
-    <a className="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span className="sr-only">Previous</span>
-    </a>
-    <a className="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-      <span className="sr-only">Next</span>
-    </a>
-    {/* <!--/.Controls--> */}
-
+    <>
+    <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
+  <div className="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-        {/* <span classNameName="headerTitleSm">One Stop Solution</span>
-        <span classNameName="headerTitleLg">Student's Helpline</span> */}
+  <div className="carousel-inner">
+    <div className="carousel-item active">
+      <img src={header1} className="d-block w-100" alt="..."/>
+      <div className="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5>
+        <p>Some representative placeholder content for the first slide.</p>
       </div>
-      {/* <img
-        classNameName="headerImg"
-        src={header}
-        alt=""
-      /> */}
     </div>
+    <div className="carousel-item">
+      <img src={header2} className="d-block w-100" alt="..."/>
+      <div className="carousel-caption d-none d-md-block">
+        <h5>Second slide label</h5>
+        <p>Some representative placeholder content for the second slide.</p>
+      </div>
+    </div>
+    <div className="carousel-item">
+      <img src={header3} className="d-block w-100" alt="..."/>
+      <div className="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+  </div>
+  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Previous</span>
+  </button>
+  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Next</span>
+  </button>
+</div>
+    
+    
+    </>
   );
 }

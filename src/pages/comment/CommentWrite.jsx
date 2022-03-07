@@ -26,17 +26,18 @@ const CommentWrite = ({postID}) => {
         //     <input type="submit" value="Submit" />
         // </div>
 
-        <div className="write container">
-      <form className="writeForm" onSubmit={handleSubmit}>
+        <div className="container">
+      <form onSubmit={handleSubmit}>
           <textarea
             placeholder="Write Comment"
             type="text"
             onChange={e=>setDesc(e.target.value)}
+            className="form-control"
           ></textarea> <br />
 
-        <button  type="submit">
+        <button className="btn btn-primary"  type="submit">
           Publish
-        </button>
+        </button> <br />
       </form>
     </div>
 
