@@ -31,7 +31,11 @@
 .navbar {
   background-color: #27395E;
   margin-bottom: 0px;
- 
+
+}
+.navbar-expand-lg {
+  padding: 0px;
+  margin: 0px;
 }
 .navbar-brand{
   height: 60px;

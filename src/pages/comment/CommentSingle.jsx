@@ -64,7 +64,32 @@ const CommentSingle = ({comment}) => {
     return (
     <div className="card  mb-3">
     <div className="card-body">
+
+    <Link to={`/${comment.userId}`} className="link">
+    <div className="d-flex justify-content-start">
+    {/* <div className="col-md-2 " style={{width:"60px"}}> */}
     <div className="settingsPP">
+                {auther.profilePic ? ( <img
+              src={PF+auther.profilePic}
+              alt=""
+            />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+           
+            </div> &nbsp; &nbsp;
+    {/* </div> */}
+    {/* <div className="col-md-10"   style={{paddingTop:"10px"}} > */}
+      <div style={{paddingTop:"10px"}}>
+      <h3 className="card-title" style={{fontSize:"16px"}}>{post.username}</h3> 
+    <h6 class="card-subtitle text-muted" style={{fontSize:"12px"}}><span>{new Date(post.createdAt).toDateString()}</span></h6>
+      </div>
+      
+    
+      {/* </div> */}
+
+
+  </div>
+  </Link>
+
+    {/* <div className="settingsPP">
                       {auther.profilePic ? ( <img
                     src={PF+auther.profilePic}
                     alt=""
@@ -80,7 +105,7 @@ const CommentSingle = ({comment}) => {
  <span>
    {new Date(comment.createdAt).toDateString()}
  </span>
- </h6>
+ </h6> */}
 
 {updateMode ? (
 <h5 className="card-title">edit comment</h5>
@@ -112,11 +137,12 @@ const CommentSingle = ({comment}) => {
 
    value={desc}
    onChange={(e) => setDesc(e.target.value)}
- />     
-   </div>
+ />     <br />
+   </div> 
 ) : ("")}
 {updateMode && (
- <button className="singlePostButton" onClick={handleUpdate}>
+  
+ <button className="singlePostButton btn btn-primary" onClick={handleUpdate}>
    Update
  </button>
 )}

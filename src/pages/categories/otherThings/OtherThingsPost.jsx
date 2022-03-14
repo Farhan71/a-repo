@@ -1,35 +1,106 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import "./otherThingsPost.css"
+
 
 const OtherThingsPost = ({post}) => {
+    const [auther, setAuther] = useState([]);
+    const [commentsNo, setCommentsNo] = useState([]);
     const PF = "http://localhost:5000/images/";
+
+
+    useEffect(() =>{
+      const getId = async () => {
+          const fetchUser = await axios.get(`users/${post.userId}`)
+          console.log(fetchUser.data)
+          setAuther(fetchUser.data)
+      };
+      getId();
+  }, [post.userId])
+
+  useEffect(() =>{
+    const fetchCommentsNo = async () => {
+        const res = await axios.get(`/comment/${post._id}/count`);
+        setCommentsNo(res.data)
+    };
+    fetchCommentsNo();
+},[post._id])
+
     return (
-        <>
-        <div style={{border: '1px solid red', height: '550px', width: '400px'}}>
-             {post.photo ? <img className="postImg" src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" /> : <img src="https://us.123rf.com/450wm/roxanabalint/roxanabalint1712/roxanabalint171200111/91315171-for-sale-grunge-rubber-stamp-on-white-background-vector-illustration.jpg?ver=6" style={{height: '200px', width: '200px'}} alt="" /> }
-      <div className="postInfo">
-        
-        {/* <div className="postCats">
-          {post.categories.map((c) => (
-            <span className="postCat">{c.name}</span>
-          ))}
-        </div> */}
-        <Link to={`/accessoriesPost/${post._id}`} className="link">
-          <span className="postTitle">Type: {post.type}</span>
-        </Link>
-        <hr />
-        <span className="postDate">
-          {new Date(post.createdAt).toDateString()}
-        </span>
+       
+
+
+<Link to={`/accessoriesPost/${post._id}`} className="link">
+<div className="card mb-3 h-80 " style={{borderRadius:"10px"}}   >
+  
+  
+  <div className="card-body"> 
+  
+  <div className="row">
+    <div className="col-md-3 " style={{width:"70px"}}>
+    <div className="settingsPP">
+                {auther.profilePic ? ( <img
+              src={PF+auther.profilePic}
+              alt=""
+            />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+           
+            </div>
+    </div>
+    <div className="col-md-9"   style={{paddingTop:"10px"}} >
+      <div>
+      <h3 className="card-title" style={{fontSize:"16px"}}>{post.username}</h3> 
+    <h6 class="card-subtitle text-muted" style={{fontSize:"12px"}}><span>{new Date(post.createdAt).toDateString()}</span></h6>
       </div>
       
-      <p className="postDesc">Quantity: {post.quantity}</p>
-      <p className="postDesc">Price: {post.price}</p> 
-      <p className="postDesc">Descriptions:{post.desc}</p>
-      <p className="postDesc">Contact: {post.contact}</p>
-        </div>
-        <br />
-        </>
+    
+      </div>
+
+
+  </div>
+
+    <h5 className="card-title">Type: {post.type}</h5>
+    <p className="card-text">Descriptions: {post.desc}</p>
+    
+          
+        
+  </div>
+  {post.photo ? <img  className="card-img-top" style={{height:"250px"}} src={PF + post.photo}  alt="" /> : <img  className="card-img-top" style={{height:"250px"}}  src="https://us.123rf.com/450wm/roxanabalint/roxanabalint1712/roxanabalint171200111/91315171-for-sale-grunge-rubber-stamp-on-white-background-vector-illustration.jpg?ver=6" alt="" /> }
+  <div className="d-flex justify-content-between px-3" >
+    
+    <p ><i class="fa-solid fa-comment"></i> &nbsp; Comments</p>  
+      
+    
+    <span>{commentsNo} comments </span>
+     
+  </div>
+</div>
+</Link>
+
+        
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+        
     );
 };
 

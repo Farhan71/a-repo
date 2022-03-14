@@ -1,14 +1,4 @@
-/* .footer-body {
-    color: #fff;
-    background-color: #27395E;
-    font-family: 'Poppins', sans-serif; 
-}
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
-
-* {
-  font-family: Open Sans;
-} */
 .last-footer, .last-footer h6 {
     background-color: #141e33;
     font-family: 'Poppins', sans-serif; 
@@ -39,11 +29,13 @@
 .footer-distributed .footer-right{
 	display: inline-block;
 	vertical-align: top;
+	font-family: 'Poppins', sans-serif; 
 }
 
 /* Footer left */
 
 .footer-distributed .footer-left{
+	font-family: 'Poppins', sans-serif; 
 	width: 40%;
 }
 
@@ -52,11 +44,13 @@
 .footer-distributed h3{
 	color:  #ffffff;
 	font: normal 20px 'Poppins', sans-serif, cursive;
+	font-family: 'Poppins', sans-serif; 
 	margin: 0;
 }
 
 .footer-distributed h3 span{
 	color:  lightseagreen;
+	font-family: 'Poppins', sans-serif; 
 }
 
 /* Footer links */
@@ -65,6 +59,7 @@
 	color:  #ffffff;
 	margin: 20px 0 12px;
 	padding: 0;
+	font-family: 'Poppins', sans-serif; 
 }
 
 .footer-distributed .footer-links a{
@@ -74,6 +69,7 @@
   font-size:10px;
 	text-decoration: none;
 	color:  inherit;
+	font-family: 'Poppins', sans-serif; 
 }
 
 .footer-distributed .footer-company-name{
@@ -81,12 +77,14 @@
 	font-size: 14px;
 	font-weight: normal;
 	margin: 0;
+	font-family: 'Poppins', sans-serif; 
 }
 
 /* Footer Center */
 
 .footer-distributed .footer-center{
 	width: 35%;
+	font-family: 'Poppins', sans-serif; 
 }
 
 .footer-distributed .footer-center i{

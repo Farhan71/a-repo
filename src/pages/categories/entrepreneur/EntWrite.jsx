@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext, useState } from "react";
 import axios from "axios";
 import {Context } from '../../../context/Context';
+import "./entWrite.css"
 
 const EntWrite = () => {
     const [locationRange, setLocationRange] = useState("");
@@ -41,7 +42,118 @@ const EntWrite = () => {
       };
 
     return (
-        <div className="write container">
+
+      <>
+
+
+<div className="write">
+
+<div className="write-body">
+<span className="write-title">Create a post</span> <br />
+<form onSubmit={handleSubmit}>
+
+
+          <input
+              type="text"
+              placeholder="StartUp Name"
+              className="form-control"
+              autoFocus={true}
+              onChange={e=>setStartUpName(e.target.value)}
+            /> <br />
+          
+          
+          <input
+              placeholder="Tell startup Type"
+              type="text"
+              className="form-control"
+              onChange={e=>setStartUpType(e.target.value)}
+            ></input> <br /> 
+
+            <input
+              placeholder="Tell Product Type"
+              type="text"
+              className="form-control"
+              onChange={e=>setProductType(e.target.value)}
+            ></input> <br />
+            
+            <input
+              placeholder="Tell price"
+              type="text"
+              className="form-control"
+              onChange={e=>setPrice(e.target.value)}
+            ></input> <br />
+
+            <input
+              placeholder="Tell quantity"
+              type="text"
+              className="form-control"
+              onChange={e=>setQuantity(e.target.value)} 
+            ></input> <br />
+
+          <textarea
+              placeholder="Tell location Range"
+              type="text"
+              className="form-control"
+              onChange={e=>setLocationRange(e.target.value)} 
+            ></textarea>  <br />
+
+
+
+    <input
+    placeholder="Tell contact"
+    type="text"
+    onChange={e=>setContact(e.target.value)}
+    className="form-control"
+  ></input> <br />
+
+
+
+
+
+
+
+
+{file && (
+<img className="writeImg" style={{height: '100px', width: '100px', marginTop: '25px'}} src={URL.createObjectURL(file)} alt="" />
+)}
+
+
+  
+  <label className="btn btn-primary" htmlFor="fileInput">
+    Add Photo
+  </label> <br />
+
+  <input
+    type="file"
+    id="fileInput"
+    style={{ display: "none" }}
+    onChange={(e) => setFile(e.target.files[0])}
+    className="form-control"
+  /> <br />
+
+  <textarea
+    placeholder="Tell description"
+    type="text"
+    onChange={e=>setDesc(e.target.value)}
+    className="form-control"
+  ></textarea> <br />
+
+
+<button  className="btn btn-primary" type="submit">
+  Publish
+</button>
+</form>
+</div>
+</div>
+
+
+
+
+
+
+
+
+        {/* <div className="write container">
         {file && (
           <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
         )}
@@ -64,7 +176,7 @@ const EntWrite = () => {
               onChange={e=>setStartUpName(e.target.value)}
             />
           </div>
-          {/* <div className="writeFormGroup"> */}
+          
           <input
               placeholder="Tell startup Type"
               type="text"
@@ -73,48 +185,48 @@ const EntWrite = () => {
             <input
               placeholder="Tell Product Type"
               type="text"
-              // className="writeInput writeText"
+              
               onChange={e=>setProductType(e.target.value)}
             ></input>
             
             <input
               placeholder="Tell price"
               type="text"
-              // className="writeInput writeText"
+              
               onChange={e=>setPrice(e.target.value)}
             ></input> <br />
             <input
               placeholder="Tell quantity"
               type="text"
-              // className="writeInput writeText"
+            
               onChange={e=>setQuantity(e.target.value)} 
             ></input> <br />
           <textarea
               placeholder="Tell location Range"
               type="text"
-              // className="writeInput writeText"
+              
               onChange={e=>setLocationRange(e.target.value)} 
             ></textarea>  <br />
             <textarea
               placeholder="Tell description"
               type="text"
-              // className="writeInput writeText"
+              
               onChange={e=>setDesc(e.target.value)}
             ></textarea> <br />
             <input
               placeholder="Tell contact"
               type="text"
-              // className="writeInput writeText"
+              
               onChange={e=>setContact(e.target.value)}
             ></input> <br />
-          {/* </div> */}
-          {/* <button className="writeSubmit" type="submit"> */}
-  
+         
           <button  type="submit">
             Publish
           </button>
         </form>
-      </div>
+      </div> */}
+
+      </>
     );
 };
 

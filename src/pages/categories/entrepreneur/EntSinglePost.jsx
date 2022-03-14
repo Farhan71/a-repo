@@ -5,8 +5,13 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import {Context} from "../../../context/Context"
 import CommentBlock from '../../comment/CommentBlock';
+import "./entSinglePost.css"
 
 const EntSinglePost = () => {
+
+  const [auther, setAuther] = useState([]);
+  const [commentsNo, setCommentsNo] = useState([]);
+
     const loc = useLocation();
     const path = loc.pathname.split("/")[2];
     const [post, setPost] = useState({});
@@ -27,6 +32,9 @@ const EntSinglePost = () => {
     useEffect(() => {
         const getPost = async () => {
           const res = await axios.get("/entrepreneur/" + path);
+          const fetchUser = await axios.get(`/users/${res.data.userId}`)
+          console.log(fetchUser.data)
+          setAuther(fetchUser.data)
           setPost(res.data);
           setLocationRange(res.data.locationRange);
           setPrice (res.data.price); 
@@ -39,6 +47,15 @@ const EntSinglePost = () => {
         };
         getPost();
       }, [path]);
+
+
+      useEffect(() =>{
+        const fetchCommentsNo = async () => {
+            const res = await axios.get(`/comment/${post._id}/count`);
+            setCommentsNo(res.data)
+        };
+        fetchCommentsNo();
+      },[post._id])
     
       const handleDelete = async () => {
         try {
@@ -62,7 +79,192 @@ const EntSinglePost = () => {
     
   
     return (
-        <div style={{border: '1px solid red', height: '650px', width: '400px'}}>
+      <>
+
+
+<div className="container" style={{height:"1200px", backgroundColor:"#f4f4f4"}}>
+  
+  <div className="row" >
+    <div className="col-md-8" style={{marginTop:"100px"}} >
+       <div className="card mb-3">
+
+         <div className="card-body">
+
+         <Link to={`/${post.userId}`} className="link">
+               <div className="row">
+               
+    <div className="col-md-3 " style={{width:"70px"}}>
+    <div className="settingsPP">
+                {auther.profilePic ? ( <img
+              src={PF+auther.profilePic}
+              alt=""
+            />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+           
+            </div>
+    </div>
+    <div className="col-md-9"   style={{paddingTop:"10px"}} >
+      <div>
+      <h3 className="card-title" style={{fontSize:"16px"}}>{post.username}</h3> 
+    <h6 class="card-subtitle text-muted" style={{fontSize:"12px"}}><span>{new Date(post.createdAt).toDateString()}</span></h6>
+      </div>
+      
+    
+      </div>
+     
+
+
+  </div>
+  </Link>
+
+  {updateMode ? (
+
+    <div>
+      <h3 className="card-title"> Product Type:: </h3>
+      <input
+      type="text"
+      value={productType}
+      className="form-control"
+      autoFocus
+      onChange={(e) => setProductType(e.target.value)}
+    />
+    </div>
+   
+  ) : (
+    <h3 className="card-title">
+      Product Type: {productType}
+      {post.username === user?.username && (
+        <div className="singlePostEdit">
+          <i
+            className="singlePostIcon far fa-edit"
+            onClick={() => setUpdateMode(true)}
+          ></i>
+          <i
+            className="singlePostIcon far fa-trash-alt"
+            onClick={handleDelete}
+          ></i>
+        </div>
+      )}
+    </h3>
+  )}
+
+  {updateMode ? (
+      <div>
+
+
+<input
+              type="text"
+              placeholder="StartUp Name"
+              className="form-control"
+              autoFocus={true}
+              onChange={e=>setStartUpName(e.target.value)}
+            />
+          
+          
+          <input
+              placeholder="Tell startup Type"
+              type="text"
+              className="form-control"
+              onChange={e=>setStartUpType(e.target.value)}
+            ></input> <br /> 
+            
+            <input
+              placeholder="Tell price"
+              type="text"
+              className="form-control"
+              onChange={e=>setPrice(e.target.value)}
+            ></input> <br />
+
+            <input
+              placeholder="Tell quantity"
+              type="text"
+              className="form-control"
+              onChange={e=>setQuantity(e.target.value)} 
+            ></input> <br />
+
+          <textarea
+              placeholder="Tell location Range"
+              type="text"
+              className="form-control"
+              onChange={e=>setLocationRange(e.target.value)} 
+            ></textarea>  <br />
+
+
+      
+    <input
+    placeholder="Tell contact"
+    type="text"
+    onChange={e=>setContact(e.target.value)}
+    className="form-control"
+  ></input> <br />
+
+<textarea
+    placeholder="Tell description"
+    type="text"
+    onChange={e=>setDesc(e.target.value)}
+    className="form-control"
+  ></textarea> <br />
+      </div>
+    
+    
+  ) : (
+      <div>
+        
+          <p className="card-text">StartUp Type: {startUpType}</p>
+          <p className="card-text">Price: {price}</p>
+          <p className="card-text">Quantity: {quantity}</p>  
+          <p className="card-text">Location Range: {locationRange}</p>
+         <p className="card-text"> Descriptions: {desc}</p>
+          <p className="card-text">Contact: 0{contact}</p>
+         
+      </div>
+    
+  )}
+  {updateMode && (
+    <button className="singlePostButton" onClick={handleUpdate}>
+      Update
+    </button>
+  )}
+</div>
+
+
+{post.photo ? <img  className="card-img-top" style={{height:"250px"}} src={PF + post.photo}  alt="" /> : <img  className="card-img-top" style={{height:"250px"}} src="https://image.shutterstock.com/image-vector/grunge-rubber-stamp-text-look-260nw-197453309.jpg" alt="" /> }
+<div className="d-flex justify-content-between px-3" >
+    
+    <p ><i class="fa-solid fa-comment"></i> &nbsp; Comments</p>  
+      
+    
+    <span>{commentsNo} comments </span>
+     
+  </div>
+
+</div>
+  </div>
+
+  
+  <div className="col-md-4">
+        <CommentBlock></CommentBlock> 
+  </div>
+
+  </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* <div style={{border: '1px solid red', height: '650px', width: '400px'}}>
         <div className="singlePostWrapper">
         {post.photo ? 
         (<img src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" className="singlePostImg" /> ):
@@ -174,7 +376,9 @@ const EntSinglePost = () => {
      </button>
    )}
  </div>
-   </div>
+   </div> */}
+
+   </>
     );
 };
 

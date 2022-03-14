@@ -78,15 +78,39 @@ useEffect(() =>{
   };
 
     return (
-<div className="container" style={{height:"1200px", backgroundColor:"#f4f4f4"}}>
+<div className="container" style={{height:"1000px", backgroundColor:"#f4f4f4"}}>
   
         <div className="row" >
-          <div className="col-md-6" style={{marginTop:"100px"}} >
+          <div className="col-md-8" style={{marginTop:"100px"}} >
              <div className="card mb-3">
 
                <div className="card-body">
+               <Link to={`/${post.userId}`} className="link">
+               <div className="row">
+               
+    <div className="col-md-3 " style={{width:"70px"}}>
+    <div className="settingsPP">
+                {auther.profilePic ? ( <img
+              src={PF+auther.profilePic}
+              alt=""
+            />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+           
+            </div>
+    </div>
+    <div className="col-md-9"   style={{paddingTop:"10px"}} >
+      <div>
+      <h3 className="card-title" style={{fontSize:"16px"}}>{post.username}</h3> 
+    <h6 class="card-subtitle text-muted" style={{fontSize:"12px"}}><span>{new Date(post.createdAt).toDateString()}</span></h6>
+      </div>
+      
+    
+      </div>
+     
 
-               <div className="settingsPP">
+
+  </div>
+  </Link>
+               {/* <div className="settingsPP">
                       {auther.profilePic ? ( <img
                     src={PF+auther.profilePic}
                     alt=""
@@ -95,7 +119,7 @@ useEffect(() =>{
                   </div>
         
         <h3 className="card-title"> <Link to={`/${post.userId}`} className="link">{post.username} </Link> </h3>
-        <h6 class="card-subtitle mb-2 text-muted"><span>{new Date(post.createdAt).toDateString()}</span></h6>
+        <h6 class="card-subtitle mb-2 text-muted"><span>{new Date(post.createdAt).toDateString()}</span></h6> */}
       
         {updateMode ? (
 
@@ -168,7 +192,7 @@ useEffect(() =>{
         ) : (
             <div>
               
-                <p className="card-text">Location Details: {locationDetails}</p>
+                <p className="card-text" >Location Details: {locationDetails}</p>
                 <p className="card-text"> Rent: {rent}</p>
                 <p className="card-text"> Member: {member}</p>
                <p className="card-text"> Descriptions: {desc}</p>
@@ -185,16 +209,22 @@ useEffect(() =>{
       </div>
   
 
-      {post.photo ? <img  className="card-img-top" src={PF + post.photo}  alt="" /> : <img src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" alt="" /> }
-        <p ><i class="fa-solid fa-comment">Comments</i></p> 
-        <p>{commentsNo}</p>
+      {post.photo ? <img style={{height:"250px"}}  className="card-img-top" src={PF + post.photo}  alt="" /> : <img style={{height:"250px"}} className="card-img-top" src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" alt="" /> }
+      <div className="d-flex justify-content-between px-3" >
+    
+    <p ><i class="fa-solid fa-comment"></i> &nbsp; Comments</p>  
+      
+    
+    <span>{commentsNo} comments </span>
+     
+  </div>
 
 
       </div>
         </div>
 
         
-        <div className="col-md-6">
+        <div className="col-md-4">
               <CommentBlock></CommentBlock> 
         </div>
 

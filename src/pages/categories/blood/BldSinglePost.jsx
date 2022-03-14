@@ -78,23 +78,37 @@ const BldSinglePost = () => {
         <div className="container" style={{height:"1200px", backgroundColor:"#f4f4f4"}} >
              <div className="row">
 
-               <div className="col-md-6" style={{marginTop:"100px"}}>
+               <div className="col-md-8" style={{marginTop:"100px"}}>
 
               <div className="card mb-3">
 
                 <div className="card-body">
 
-                <div className="settingsPP">
-                      {auther.profilePic ? ( <img
-                    src={PF+auther.profilePic}
-                    alt=""
-                  />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
-                 
-                  </div>
+                <Link to={`/${post.userId}`} className="link">
+               <div className="row">
+               
+    <div className="col-md-3 " style={{width:"70px"}}>
+    <div className="settingsPP">
+                {auther.profilePic ? ( <img
+              src={PF+auther.profilePic}
+              alt=""
+            />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+           
+            </div>
+    </div>
+    <div className="col-md-9"   style={{paddingTop:"10px"}} >
+      <div>
+      <h3 className="card-title" style={{fontSize:"16px"}}>{post.username}</h3> 
+    <h6 class="card-subtitle text-muted" style={{fontSize:"12px"}}><span>{new Date(post.createdAt).toDateString()}</span></h6>
+      </div>
+      
+    
+      </div>
+     
 
-                  <h3 className="card-title"> <Link to={`/${post.userId}`} className="link">{post.username} </Link> </h3>
-        <h6 class="card-subtitle mb-2 text-muted"><span>{new Date(post.createdAt).toDateString()}</span></h6>
 
+  </div>
+  </Link>
             
         {updateMode ? (
           <div>
@@ -191,15 +205,21 @@ const BldSinglePost = () => {
 </div>
 
 {post.photo ? 
-        (<img src={PF + post.photo} alt="" className="card-img-top" /> ):
-          <img src="https://previews.123rf.com/images/laracold/laracold1706/laracold170600015/80321483-creative-blood-motivation-information-donor-poster-blood-donation-world-blood-donor-day-banner-red-b.jpg"  alt="" /> }
-          <p ><i class="fa-solid fa-comment">Comments</i></p> 
-        <p>{commentsNo}</p>
+        (<img src={PF + post.photo} style={{height:"250px"}} alt="" className="card-img-top" /> ):
+          <img className="card-img-top" style={{height:"250px"}} src="https://previews.123rf.com/images/laracold/laracold1706/laracold170600015/80321483-creative-blood-motivation-information-donor-poster-blood-donation-world-blood-donor-day-banner-red-b.jpg"  alt="" /> }
+          <div className="d-flex justify-content-between px-3" >
+    
+    <p ><i class="fa-solid fa-comment"></i> &nbsp; Comments</p>  
+      
+    
+    <span>{commentsNo} comments </span>
+     
+  </div>
 
 </div>
 </div>
 
-        <div className="col-md-6">
+        <div className="col-md-4">
               <CommentBlock></CommentBlock> 
         </div>
 

@@ -46,6 +46,7 @@ function App() {
         <Route exact path="/">{user ? <Home /> : <LandingPage/>}</Route>
         <Route path="/register"> <Register/></Route>
         <Route path="/login"> <Login/></Route>
+        <Route path="/about"> <LandingPage/></Route>
         <Route path="/otpVerify/:id"> <OtpVerify></OtpVerify></Route>
         <Route path="/write">{user ? <Write /> : <LandingPage/>}</Route>
         <Route path="/contact">{user ? <Contact /> : <LandingPage/>}</Route>

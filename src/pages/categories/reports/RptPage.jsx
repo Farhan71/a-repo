@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import RptPosts from './RptPosts';
 import RptWrite from './RptWrite';
+import "./rptPage.css";
+import { useLocation } from "react-router";
 
 const RptPage = () => {
     const [posts, setPosts] = useState([]);
@@ -14,13 +16,23 @@ const RptPage = () => {
       fetchPosts();
     }, []);
     return (
+
+      <div className="post-page container">
+        
+        
         <div className="row">
-            <div className="col-6">
+            <div className="col-md-6">
             <RptPosts posts={posts}></RptPosts>
             </div>
-            <div className="col-6">
-            <RptWrite></RptWrite>
+            <div className="col-md-6">
+              <div className="write-portion">
+                
+              <RptWrite></RptWrite>
+                </div>
+            
             </div>
+        </div>
+
         </div>
     );
 };

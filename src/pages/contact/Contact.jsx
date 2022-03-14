@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext, useState } from "react";
 import axios from "axios";
 import {Context } from '../../context/Context';
+import "./contact.css"
 
 const Contact = () => {
     const [title, setTitle] = useState("");
@@ -33,6 +34,69 @@ const Contact = () => {
         } catch (err) {}
       };
     return (
+
+      <>
+      
+      
+      <div className="d-flex align-items-center justify-content-center contact-write">
+
+<div className="contact-write-body">
+<span className="contact-write-title">Contact with admin and give feedback</span> <br /> <br />
+<form onSubmit={handleSubmit}>
+
+
+  <input
+    placeholder="Title"
+    type="text"
+    onChange={e=>setTitle(e.target.value)}
+    className="form-control"
+  ></input>  <br />
+
+
+
+
+
+
+{file && (
+<img className="writeImg" style={{height: '100px', width: '100px', marginTop: '25px'}} src={URL.createObjectURL(file)} alt="" />
+)}
+
+
+  
+  <label className="btn btn-outline-primary " htmlFor="fileInput">
+    Add Photo
+  </label> <br />
+  <input
+    type="file"
+    id="fileInput"
+    style={{ display: "none" }}
+    onChange={(e) => setFile(e.target.files[0])}
+    className="form-control"
+  /> <br />
+
+ 
+
+  <textarea
+    placeholder="Tell description"
+    type="text"
+    onChange={e=>setDesc(e.target.value)}
+    className="form-control"
+  ></textarea> <br />
+<div className="text-center md-5">
+
+<button className="btn btn-outline-primary " type="submit">
+  Send
+</button>
+</div>
+</form>
+</div>
+</div>
+      
+      
+      
+      
+      
+{/*      
         <div className="write container">
         {file && (
           <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
@@ -63,7 +127,10 @@ const Contact = () => {
             Publish
           </button>
         </form>
-      </div>
+      </div> */}
+
+
+      </>
     );
 };
 

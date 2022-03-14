@@ -216,11 +216,11 @@ const Register =() =>{
    onChange={(e) => setIsReporter(e.target.value)}
  />  */}
  
- <br /> <br />
+ <br /> <br /> <br />
 
  <div className="text-center md-5">
 
- { validEmail &&  <button style={{width:"120px"}} type="submit" className="btn btn-outline-primary" >Register</button> }
+ { validEmail ?  <button style={{width:"120px"}} type="submit" className="btn btn-outline-primary" >Register</button> : <h6>Enter your valid Edu-mail ID and get register button </h6> }
  {/* { validEmail &&  <button style={{width:"120px"}} type="submit" >Register</button> } */}
 
  </div>

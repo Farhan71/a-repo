@@ -73,8 +73,9 @@ export default function Settings() {
         <form  onSubmit={handleSubmit}>
           <label>Profile Picture</label>
           <div className="settingsPP">
+    
             <img
-              src={file ? URL.createObjectURL(file) : PF+user.profilePic}
+              src={file ? (URL.createObjectURL(file) ) : PF+user.profilePic}
               alt=""
             />
             <label htmlFor="fileInput">
@@ -165,6 +166,7 @@ export default function Settings() {
 
 
     <div className="col-md-6">
+      <br />
     <MyPosts></MyPosts>
     </div>
 

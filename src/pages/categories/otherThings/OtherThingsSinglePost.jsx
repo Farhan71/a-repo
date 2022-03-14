@@ -5,8 +5,12 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import {Context} from "../../../context/Context"
 import CommentBlock from '../../comment/CommentBlock';
+import "./otherThingsSinglePost.css";
 
 const OtherThingsSinglePost = () => {
+    const [auther, setAuther] = useState([]);
+    const [commentsNo, setCommentsNo] = useState([]);
+
     const loc = useLocation();
     const path = loc.pathname.split("/")[2];
     const [post, setPost] = useState({});
@@ -23,6 +27,9 @@ const OtherThingsSinglePost = () => {
     useEffect(() => {
       const getPost = async () => {
         const res = await axios.get("/otherThings/" + path);
+        const fetchUser = await axios.get(`/users/${res.data.userId}`)
+        console.log(fetchUser.data)
+        setAuther(fetchUser.data)
         setPost(res.data);
         setType(res.data.type);
         setQuantity (res.data.quantity);
@@ -32,6 +39,15 @@ const OtherThingsSinglePost = () => {
       };
       getPost();
     }, [path]);
+
+    useEffect(() =>{
+      const fetchCommentsNo = async () => {
+          const res = await axios.get(`/comment/${post._id}/count`);
+          setCommentsNo(res.data)
+      };
+      fetchCommentsNo();
+    },[post._id])
+    
   
     const handleDelete = async () => {
       try {
@@ -53,7 +69,165 @@ const OtherThingsSinglePost = () => {
       } catch (err) {}
     };
     return (
-        <div style={{border: '1px solid red', height: '500px', width: '400px'}}>
+      <>
+
+<div className="container" style={{height:"1200px", backgroundColor:"#f4f4f4"}}>
+  
+        <div className="row" >
+          <div className="col-md-8" style={{marginTop:"100px"}} >
+             <div className="card mb-3">
+
+               <div className="card-body">
+
+               <Link to={`/${post.userId}`} className="link">
+               <div className="row">
+               
+    <div className="col-md-3 " style={{width:"70px"}}>
+    <div className="settingsPP">
+                {auther.profilePic ? ( <img
+              src={PF+auther.profilePic}
+              alt=""
+            />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
+           
+            </div>
+    </div>
+    <div className="col-md-9"   style={{paddingTop:"10px"}} >
+      <div>
+      <h3 className="card-title" style={{fontSize:"16px"}}>{post.username}</h3> 
+    <h6 class="card-subtitle text-muted" style={{fontSize:"12px"}}><span>{new Date(post.createdAt).toDateString()}</span></h6>
+      </div>
+      
+    
+      </div>
+     
+
+
+  </div>
+  </Link>
+      
+        {updateMode ? (
+
+          <div>
+            <h3 className="card-title">Type: </h3>
+            <input
+            type="text"
+            value={type}
+            className="form-control"
+            autoFocus
+            onChange={(e) => setType(e.target.value)}
+          />
+          </div>
+         
+        ) : (
+          <h3 className="card-title">
+            Type: {type}
+            {post.username === user?.username && (
+              <div className="singlePostEdit">
+                <i
+                  className="singlePostIcon far fa-edit"
+                  onClick={() => setUpdateMode(true)}
+                ></i>
+                <i
+                  className="singlePostIcon far fa-trash-alt"
+                  onClick={handleDelete}
+                ></i>
+              </div>
+            )}
+          </h3>
+        )}
+      
+        {updateMode ? (
+            <div>
+
+
+             <h6 className="card-text">Quantity: </h6>  
+            <textarea
+            className="form-control"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          /> <br />
+
+             <h6 className="card-text">Price: </h6>   <textarea
+            className="form-control"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          /> <br />
+
+
+            <h6 className="card-text">Description: </h6> <textarea
+            className="form-control"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+          /> <br />
+
+             <h6 className="card-text">Contact: </h6>   <textarea
+            className="form-control"
+            value={contact}
+            onChange={(e) => setContact(e.target.value)}
+          /> <br />
+            </div>
+          
+          
+        ) : (
+            <div>
+              
+                <p className="card-text"> Quantity: {quantity}</p>
+                <p className="card-text"> Price: {price}</p>
+               <p className="card-text"> Descriptions: {desc}</p>
+                <p className="card-text">Contact: 0{contact}</p>
+               
+            </div>
+          
+        )}
+        {updateMode && (
+          <button className="singlePostButton" onClick={handleUpdate}>
+            Update
+          </button>
+        )}
+      </div>
+  
+
+      {post.photo ? <img  className="card-img-top" style={{height:"250px"}} src={PF + post.photo}  alt="" /> : <img className="card-img-top" style={{height:"250px"}} src="https://us.123rf.com/450wm/roxanabalint/roxanabalint1712/roxanabalint171200111/91315171-for-sale-grunge-rubber-stamp-on-white-background-vector-illustration.jpg?ver=6" alt="" /> }
+      <div className="d-flex justify-content-between px-3" >
+    
+    <p ><i class="fa-solid fa-comment"></i> &nbsp; Comments</p>  
+      
+    
+    <span>{commentsNo} comments </span>
+     
+  </div>
+
+
+      </div>
+        </div>
+
+        
+        <div className="col-md-4">
+              <CommentBlock></CommentBlock> 
+        </div>
+
+        </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* <div style={{border: '1px solid red', height: '500px', width: '400px'}}>
         <div className="singlePostWrapper">
         {post.photo ? 
         (<img src={PF + post.photo} style={{height: '200px', width: '200px'}} alt="" className="singlePostImg" /> ):
@@ -146,7 +320,9 @@ const OtherThingsSinglePost = () => {
      </button>
    )}
  </div>
-   </div>
+   </div> */}
+
+   </>
     );
 };
 

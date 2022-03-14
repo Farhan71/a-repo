@@ -135,7 +135,7 @@ const BldWrite = () => {
             ></textarea> <br />
 
         
-          <button  type="submit">
+          <button className="btn btn-primary" type="submit">
             Publish
           </button>
         </form>

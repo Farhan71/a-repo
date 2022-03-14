@@ -64,7 +64,6 @@ const AccWrite = () => {
           <textarea
             placeholder="Tell location details"
             type="text"
-            // className="writeInput writeText"
             onChange={e=>setLocationDetails(e.target.value)}
             className="form-control"
           ></textarea>  <br />
@@ -79,7 +78,6 @@ const AccWrite = () => {
           <input
             placeholder="Tell member"
             type="text"
-            // className="writeInput writeText"
             onChange={e=>setMember(e.target.value)}
             className="form-control"
           ></input> <br />
@@ -89,7 +87,7 @@ const AccWrite = () => {
             <input
             placeholder="Tell contact"
             type="text"
-            // className="writeInput writeText"
+           
             onChange={e=>setContact(e.target.value)}
             className="form-control"
           ></input> <br />
@@ -102,7 +100,7 @@ const AccWrite = () => {
       )}
      
         
-          {/* <span>Picture: </span> */}
+          
           <label className="btn btn-primary" htmlFor="fileInput">
             Add Photo
           </label> <br />
@@ -113,38 +111,18 @@ const AccWrite = () => {
             onChange={(e) => setFile(e.target.files[0])}
             className="form-control"
           /> <br />
-          {/* <input
-            type="text"
-            placeholder="Location"
-            className="writeInput"
-            autoFocus={true}
-            onChange={e=>setLocation(e.target.value)}
-          /> */}
-        
-
-
-       
-        
-      
- 
-
-        {/* <div className="writeFormGroup"> */}
         
          
         
           <textarea
             placeholder="Tell description"
             type="text"
-            // className="writeInput writeText"
             onChange={e=>setDesc(e.target.value)}
             className="form-control"
           ></textarea> <br />
 
-            
-        {/* </div> */}
-        {/* <button className="writeSubmit" type="submit"> */}
 
-        <button  type="submit">
+        <button className="btn btn-primary"  type="submit">
           Publish
         </button>
       </form>

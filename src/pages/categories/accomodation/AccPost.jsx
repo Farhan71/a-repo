@@ -15,7 +15,6 @@ const AccPost = ({ post }) => {
           const fetchUser = await axios.get(`users/${post.userId}`)
           console.log(fetchUser.data)
           setAuther(fetchUser.data)
-          // setId(res.data)
       };
       getId();
   }, [post.userId])
@@ -29,38 +28,61 @@ const AccPost = ({ post }) => {
 },[post._id])
     
     return (
-      <div className="post-body">
+     
 
 <Link to={`/accommodationPost/${post._id}`} className="link">
-<div className="card mb-3 "   >
+<div className="card mb-3 h-80 "  style={{borderRadius:"10px"}}  >
   
   
   <div className="card-body"> 
-  <div className="settingsPP">
+  <div className="row">
+    <div className="col-md-3 " style={{width:"70px"}}>
+    <div className="settingsPP">
                 {auther.profilePic ? ( <img
               src={PF+auther.profilePic}
               alt=""
             />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
            
             </div>
+    </div>
+    <div className="col-md-9"   style={{paddingTop:"10px"}} >
+      <div>
+      <h3 className="card-title" style={{fontSize:"16px"}}>{post.username}</h3> 
+    <h6 class="card-subtitle text-muted" style={{fontSize:"12px"}}><span>{new Date(post.createdAt).toDateString()}</span></h6>
+      </div>
+      
+    
+      </div>
+
+
+  </div>
   
-  <h3 className="card-title">{post.username}</h3>
-    <h6 class="card-subtitle mb-2 text-muted"><span>{new Date(post.createdAt).toDateString()}</span></h6>
-    <h5 className="card-title">Location: {post.location}</h5>
-    <p className="card-text">Rent: {post.rent}</p>
-    <p className="card-text">Descriptions: {post.desc}</p>
+  
+  
+    <h5 className="card-title" >Location: {post.location}</h5>
+    <p className="card-text" >Rent: {post.rent}</p>
+    <p className="card-text" >Descriptions: {post.desc}</p>
     
           
         
   </div>
-  {post.photo ? <img  className="card-img-top" src={PF + post.photo}  alt="" /> : <img src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" alt="" /> }
-  <p ><i class="fa-solid fa-comment">Comments</i></p> 
-  <p>{commentsNo}</p>
+  {post.photo ? <img  className="card-img-top" style={{height:"250px"}} src={PF + post.photo}  alt="" /> : <img style={{height:"250px"}} className="card-img-top" src="https://www.wantedinrome.com/i/preview/storage/uploads/2017/05/Acc-Vacant-in_light.jpg" alt="" /> }
+
+  <div className="d-flex justify-content-between px-3" >
+    
+    <p ><i class="fa-solid fa-comment"></i> &nbsp; Comments</p>  
+      
+    
+    <span>{commentsNo} comments </span>
+     
+  </div>
+  
+  
 </div>
 </Link>
 
         
-        </div>
+        
     );
 };
 

@@ -4,6 +4,7 @@ import axios from "axios";
 import BookPosts from './BookPosts';
 import BookWrite from './BookWrite';
 import { useLocation } from "react-router";
+import "./bookPage.css"
 
 const BookPage = () => {
     const [posts, setPosts] = useState([]);
@@ -31,7 +32,7 @@ const BookPage = () => {
       console.log (filterPosts)
 
     return (
-        <>
+        <div className="post-page container">
 
                 <label for="Department">Choose a department:</label>
                     <select onChange={(e) =>  {
@@ -60,19 +61,21 @@ const BookPage = () => {
         
           <div className="row">
 
-            <div className="col-6">
+            <div className="col-md-6">
                 {
                     filter ? (<BookPosts  posts={filterPosts} /> ) : (<BookPosts  posts={posts} />)
                 }
                 
             </div>
-            <div className="col-6">    
+            <div className="col-md-6">    
+            <div className="write-portion">
                 <BookWrite></BookWrite>
+            </div>
             </div>
              
         </div>
         
-        </>
+        </div>
         
     );
 };

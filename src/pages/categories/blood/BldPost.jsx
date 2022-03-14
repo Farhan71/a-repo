@@ -29,16 +29,18 @@ const BldPost = ({post}) => {
 },[post._id])
 
     return (
-        <div className="post-body">
+        
 
 <Link to={`/bloodPost/${post._id}`} className="link">
 
-  <div className="card mb-3">
+  <div className="card mb-3 h-80 "  style={{borderRadius:"10px"}}>
     
     
     <div className="card-body">
 
 
+    <div className="row">
+    <div className="col-md-3 " style={{width:"70px"}}>
     <div className="settingsPP">
                 {auther.profilePic ? ( <img
               src={PF+auther.profilePic}
@@ -46,12 +48,18 @@ const BldPost = ({post}) => {
             />) : (<img alt='' src={"http://www.megaweb.co.th/demo/travus/components/com_spbooking/assets/images/default.png"}></img>)}
            
             </div>
-            
+    </div>
+    <div className="col-md-9"   style={{paddingTop:"10px"}} >
+      <div>
+      <h3 className="card-title" style={{fontSize:"16px"}}>{post.username}</h3> 
+    <h6 class="card-subtitle text-muted" style={{fontSize:"12px"}}><span>{new Date(post.createdAt).toDateString()}</span></h6>
+      </div>
       
-        
-          
-          <h3 className="card-title">{post.username}</h3>
-          <h6 class="card-subtitle mb-2 text-muted"><span>{new Date(post.createdAt).toDateString()}</span></h6>
+    
+      </div>
+
+
+  </div>
       
         
      
@@ -67,15 +75,21 @@ const BldPost = ({post}) => {
         </div>
       
 
-        {post.photo ? <img className="card-img-top" src={PF + post.photo} alt="" /> : <img src="https://previews.123rf.com/images/laracold/laracold1706/laracold170600015/80321483-creative-blood-motivation-information-donor-poster-blood-donation-world-blood-donor-day-banner-red-b.jpg" alt="" /> }
-        <p ><i class="fa-solid fa-comment">Comments</i></p> 
-        <p>{commentsNo}</p>
+        {post.photo ? <img className="card-img-top" style={{height:"250px"}} src={PF + post.photo} alt="" /> : <img  className="card-img-top" style={{height:"250px"}} src="https://previews.123rf.com/images/laracold/laracold1706/laracold170600015/80321483-creative-blood-motivation-information-donor-poster-blood-donation-world-blood-donor-day-banner-red-b.jpg" alt="" /> }
+        <div className="d-flex justify-content-between px-3" >
+    
+    <p ><i class="fa-solid fa-comment"></i> &nbsp; Comments</p>  
+      
+    
+    <span>{commentsNo} comments </span>
+     
+  </div>
 
         </div>
 
         </Link>
        
-        </div>
+        
     );
 };
 

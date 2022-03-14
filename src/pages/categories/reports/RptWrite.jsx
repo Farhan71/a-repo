@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext, useState } from "react";
 import axios from "axios";
 import {Context } from '../../../context/Context';
+import "./rptWrite.css"
 
 const RptWrite = () => {
     const [desc, setDesc] = useState("");
@@ -34,8 +35,74 @@ const RptWrite = () => {
       window.location.reload();
     } catch (err) {}
   };
+
+
     return (
-        <div className="write container"> 
+      <>
+
+
+<div className="write">
+
+        <div className="write-body">
+        <span className="write-title">Create a post</span> <br />
+        <form onSubmit={handleSubmit}>
+
+    
+          <textarea
+            placeholder="Write Title"
+            type="text"
+            onChange={e=>setTitle(e.target.value)}
+            className="form-control"
+          ></textarea>  <br />
+
+      
+
+      {file && (
+        <img className="writeImg" style={{height: '100px', width: '100px', marginTop: '25px'}} src={URL.createObjectURL(file)} alt="" />
+      )}
+     
+        
+          
+          <label className="btn btn-primary" htmlFor="fileInput">
+            Add Photo
+          </label> <br />
+          <input
+            type="file"
+            id="fileInput"
+            style={{ display: "none" }}
+            onChange={(e) => setFile(e.target.files[0])}
+            className="form-control"
+          /> <br />
+        
+         
+        
+          <textarea
+            placeholder="Write description"
+            type="text"
+            onChange={e=>setDesc(e.target.value)}
+            className="form-control"
+          ></textarea> <br />
+
+
+        <button className="btn btn-primary" type="submit">
+          Publish
+        </button>
+      </form>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* <div className="write container"> 
       {file && (
         <img className="writeImg" style={{height: '200px', width: '200px'}} src={URL.createObjectURL(file)} alt="" />
       )}
@@ -58,21 +125,20 @@ const RptWrite = () => {
             onChange={e=>setTitle(e.target.value)}
           />
         </div>
-        {/* <div className="writeFormGroup"> */}
           <textarea
             placeholder="Tell description"
             type="text"
-            // className="writeInput writeText"
             onChange={e=>setDesc(e.target.value)}
           ></textarea> <br />
-        {/* </div> */}
-        {/* <button className="writeSubmit" type="submit"> */}
+       
 
         <button  type="submit">
           Publish
         </button>
       </form>
-    </div>
+    </div> */}
+
+    </>
     );
 };
 

@@ -4,6 +4,7 @@ import axios from "axios";
 import OtherThingsPosts from './OtherThingsPosts';
 import OtherThingsWrite from './OtherThingsWrite';
 import { useLocation } from "react-router";
+import "./otherThingsPage.css"
 
 
 const OtherThingsPage = () => {
@@ -32,7 +33,9 @@ const OtherThingsPage = () => {
     console.log (filterPosts)
 
     return (
-        <>
+        
+
+        <div className="post-page container">
 
 <label for="Type">Choose a type:</label>
                     <select onChange={(e) =>  {
@@ -57,21 +60,25 @@ const OtherThingsPage = () => {
                    
 
         <div className="row">
-        <div className="col-6">
+        <div className="col-md-6">
                     {
                       filter ? (<OtherThingsPosts posts={filterPosts}></OtherThingsPosts>) : (<OtherThingsPosts posts={posts}></OtherThingsPosts>)
                     }
                     {/* <OtherThingsPosts posts={posts}></OtherThingsPosts>
                     {filter && <OtherThingsPosts posts={filterPosts}></OtherThingsPosts> } */}
         </div>
-        <div className="col-6">
+        <div className="col-md-6">
+          <div className="write-portion">
             <OtherThingsWrite></OtherThingsWrite>
+            </div>
+        </div>
+
         </div>
 
         </div>
         
         
-        </>
+        
     );
 };
 

@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import EntWrite from './EntWrite';
 import EntPosts from './EntPosts';
+import "./entPage.css"
+
 
 const EntPage = () => {
+
     const [posts, setPosts] = useState([]);
     useEffect(() => {
       const fetchPosts = async () => {
@@ -14,15 +17,25 @@ const EntPage = () => {
       fetchPosts();
     }, []);
     return (
+
+      <div className="post-page container">
         <div className="row">
-            <div className="col-6">
+            <div className="col-md-6">
             <EntPosts posts={posts}></EntPosts>
             </div>
-            <div className="col-6">
+            <div className="col-md-6">
+              <div className="write-portion">
+                
+                
+                
             <EntWrite></EntWrite>
+
+            </div>
             </div>
             
             
+        </div>
+
         </div>
     );
 };

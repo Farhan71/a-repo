@@ -6,18 +6,16 @@ import "./landingPage.css"
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
-    // const [registerPopup, setRegisterPopup] = useState(false)
-    // const [loginPopup, setLoginPopup] = useState(false)
-    // const [otpVerifyPopup, setOtpVerifyPopup] = useState(false)
+    
     return (
         <div>
            <main className="landing-page">
                
-               <div className="banner d-flex align-items-center justify-content-center  ">
+               <div className="banner d-flex align-items-center justify-content-center ">
                    <div className="banner-text text-center ">
-                       <h4>WElCOME TO</h4> 
-                   <h1>STUDENT HELPLINE</h1>  
-                   <h6>A ONE STOP SOLUTION TO FULLFILL YOUR NEEDS </h6> 
+                       <h4 style={{fontWeight:"bold"}}>WELCOME TO</h4> 
+                   <h1 style={{fontWeight:"bold", fontSize:"40px"}}>STUDENT HELPLINE</h1>  
+                   <h6 style={{fontWeight:"bold"}}>A ONE STOP SOLUTION TO FULLFILL YOUR NEEDS </h6> 
                    </div>
                
                </div>
@@ -30,8 +28,8 @@ const LandingPage = () => {
                                          <div className="icon">
                                          <i className="fa-solid fa-user-plus"></i>
                                          </div>
-                                        <h5 className="card-title">Card title</h5>
-                                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 className="card-title" style={{fontSize:"20px"}}>Register, verify and login</h5> <br />
+                                        <p className="card-text">Register with your valid Edu-mail, check your mail for otp, verify mail and login. Help us to buid a secure environment.</p>
                                 </div>
                             </div>                    
                         </div>
@@ -43,8 +41,8 @@ const LandingPage = () => {
                                 <div className="icon">
                                 <i class="fa-solid fa-list"></i>
                                          </div>
-                                        <h5 className="card-title">Card title</h5>
-                                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 className="card-title" style={{fontSize:"20px"}}> Interact in six different categories</h5> <br />
+                                        <p className="card-text">Post and comment in six different categories. You can also sort and filter postings by different parameters.</p> 
                                 </div>
                             </div>              
                         </div>
@@ -56,30 +54,24 @@ const LandingPage = () => {
                                 <div className="icon">
                                 <i class="fa-solid fa-circle-question"></i>
                                          </div>
-                                        <h5 className="card-title">Card title</h5>
-                                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 className="card-title" style={{fontSize:"20px"}}> Stuck? Don't hesitate to contact with us</h5> <br />
+                                        <p className="card-text">Contact us via sending message from contact page. We eagerly wait to help you whatever your problem would be.  </p>
                                 </div>
                             </div>    
                         </div>
                     </div>
                </div>
-               {/* <button onClick={()=> setRegisterPopup(true)}>Register Here</button> <br /> <br />
-               <button onClick={()=> setLoginPopup(true)}>Login Here</button> */}
-               {/* <Link to="/register">Register Here</Link> <br />
-               <Link to="/login">Login Here</Link> */}
                 <div className="landing-last">
                     <div className="container text-center">
 
                     
                         <h1>How It Works</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam voluptatum omnis quas deserunt, rerum molestias incidunt quis sequi. Quia, recusandae, sit optio, natus voluptate dolore commodi ipsam possimus non aspernatur blanditiis ab illo. Adipisci quod doloremque reprehenderit blanditiis eaque corrupti at ducimus, dicta temporibus, tempore praesentium commodi repellat? Quisquam sit totam velit impedit, eveniet quam ullam, repudiandae eius corporis dignissimos sunt, beatae accusamus non fuga a tenetur veritatis dolore. Nulla fuga aliquam aperiam nostrum illum distinctio hic saepe dolorum eum laborum reprehenderit sed necessitatibus neque consequuntur assumenda nam, dolor ut quaerat quidem cumque vel? Cum voluptatibus sit exercitationem? Voluptatibus dolorem distinctio maxime ipsam quia suscipit earum at dignissimos laboriosam eum? Accusamus ab placeat explicabo non modi doloribus, tempore ex alias. Inventore modi, quas voluptates natus doloremque temporibus nam necessitatibus saepe labore, cum dolores culpa accusamus quis impedit optio. Explicabo accusantium iste nobis incidunt? Quasi labore ipsam dicta facilis corporis provident?</p>
+                        <p>This is a web application enabling university students to interact with each other to meet their different day-to-day demands other than academic requirements. A university student moves to a new town from another city, district, or even country for a term of at least four years. As a result, a new student faces a variety of daily living issues, such as finding cheap housing, purchasing books and accessories, donating blood and so on, and it might be difficult for them to discover all of this information in their new location. Again, entrepreneurs need to publish to promote their products, while student journalists need to show a variety of articles. An online application that provides an one-stop solution for accessing this information will assist students in making their lives easier and more comfortable, allowing them to focus on their academics. It reduces reliance on social media groups for such needs. This program allows students to assist one another, resulting in a more effective student community helpdesk platform. As a result, such a web application will increase data access and service quality while also reducing effort and time. </p>
                     </div>
                 </div>
                
             </main>    
-            {/* <Register trigger={registerPopup} setTrigger={setRegisterPopup}>
-               </Register>    
-            <Login trigger={loginPopup} setTrigger={setLoginPopup}></Login> */}
+            
         </div>
     );
 };
